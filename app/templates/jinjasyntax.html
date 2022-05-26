@@ -1,0 +1,21 @@
+{#   {#  #}  = Jinja Comment   #}
+{#   {%  %}  = Jinja statements = Python code, like for loops/conditionals #}
+{#   {{  }}  = Jinja Expressions:  Python values:  like, variables, function calls. they print out the value to (?) the html.  #}
+
+
+{# example #}
+
+{% if True %}
+    {#  As in Python, conditionals start indented code block, INCLUDING closing a for loop inside of a for loop (like with html tags) #}
+    {# but must manually close the code block in Jinja #}
+{% elif True %}
+{% endif True %}   
+
+{% for i in range(5) %}
+    {# for loop will repeat the code inside ofi t ading the result to the template #}
+    <h1 id="{{i}}">Foxes</h1>
+    {# above would produce in template 5 different h1s, each with an ide 0 thru 4, all with the contents "Foxes" #}
+{% endfor True %}  
+
+
+    {#  #}

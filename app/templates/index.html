@@ -1,0 +1,26 @@
+{% extends 'components/layout.html' %}
+<head>
+    {% block title %} 
+        Home
+    {% endblock title %}
+</head>
+
+<body>
+    {% block header %}
+
+ 
+    {% endblock header %}
+
+    {% block content %}
+    <table style="margin-top:10px">
+        <tr>
+            <td> <img class='img-fluid' style="width:100px;height:150px" src="static/images/bluejay_portrait.jpg" alt='bluejay_portrait' /></td>
+            <td> <img class='img-fluid' style="width:128px;height:150px" src="static/images/hummer_landscape.jpg" alt='hummer_landscape' /></td>
+            <td> <img class='img-fluid' style="width:120px;height:150px" src="static/images/oriole_portrait.jpg" alt='oriole' /></td>
+            <td> <img class='img-fluid' style="width:112px;height:150px" src="static/images/cardinal_portrait.jpg" alt='Cardinal' /></td>
+        </tr>
+    </table>
+    {% endblock content %}
+
+</body>
+
