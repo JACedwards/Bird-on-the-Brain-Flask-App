@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from .authforms import LoginForm
 
 auth = Blueprint('auth', __name__, template_folder='auth_templates', url_prefix='/auth')
 
@@ -7,10 +8,10 @@ auth = Blueprint('auth', __name__, template_folder='auth_templates', url_prefix=
 
 @auth.route('/login')
 def login():
-    return 'test'
+    # return 'test'
  #commented out below when having problems with flask_wtf forms.   
-    # lform = LoginForm()
-    # return render_template('signin.html', form = lform)
+    lform = LoginForm()
+    return render_template('signin.html', form = lform)
 
 @auth.route('/base')
 def base_test():

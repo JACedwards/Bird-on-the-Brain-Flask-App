@@ -20,4 +20,4 @@ class Config:
 
     FLASK_APP = os.environ.get('FLASK_APP') 
     FLASK_ENV = os.environ.get('FLASK_ENV')
-    FLASK_KEY = os.environ.get('SECRET_KEY')
+    SECRET_KEY = os.environ.get('FLASK_KEY')
