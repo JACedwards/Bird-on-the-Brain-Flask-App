@@ -6,6 +6,7 @@ auth = Blueprint('auth', __name__, template_folder='auth_templates', url_prefix=
 
 @auth.route('/login', methods=['GET','POST'])
 def login():
+
    
     lform = LoginForm()
 ###Stopped here in the forms video
@@ -18,7 +19,5 @@ def login():
 
     return render_template('signin.html', form = lform)
 
-# @auth.route('/base')
-# def base_test():
 
-#     return render_template('base.html')
+

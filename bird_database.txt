@@ -1,0 +1,15 @@
+https://avibase.bsc-eoc.org/avibase.jsp?lang=EN
+Go to above
+Enter your own region name
+Click on the latin name of a bird of interest
+Click on life history tab for info required in this database
+
+id
+name
+latin_name
+realm
+habitat
+feeding
+fledge_days
+weight_g
+life_exp
