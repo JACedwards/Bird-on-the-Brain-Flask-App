@@ -3,10 +3,9 @@ from flask import Flask
 from config import Config 
 from .auth.routes import auth
 #database imports
-from .models import db
-
-####FLASK_MIGRATE not recognized######
+from .models import db, login
 from flask_migrate import Migrate
+
   
 
 app = Flask(__name__)
@@ -16,8 +15,12 @@ app.register_blueprint(auth)
 
 db.init_app(app)
 
-####MIGRATE not recogized
 migrate = Migrate(app,db)
+
+login.init_app(app)
+login.login_view = 'auth.login'
+login.login_message = 'Please log in to see this page.'
+login.login_message_category = 'danger'
 
 
 
