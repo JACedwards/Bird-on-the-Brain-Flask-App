@@ -35,15 +35,23 @@ def register():
             # print(form.data)
             newuser = User(form.username.data, form.email.data, form.password.data,  )
             print(newuser)
-            db.session.add(newuser)
-            db.session.commit()
-            flash('Welcome! Thank you for registering!', 'info')
+
+            try:
+                db.session.add(newuser)
+                db.session.commit()
+            except:
+                flash('Username of email already taken.  Please try a different ones.', category='danger')
+                return redirect(url_for('auth.register'))
+
+            login_user(newuser)
+            flash(f'Welcome, {newuser.username}! Thank you for signing up!', 'info')
             return redirect(url_for('home'))
         else:
             flash("Sorry, your passwords don't match.  Please try again.", 'danger')
             return redirect(url_for('auth.register'))
 
-    return render_template('register.html', form=form)
+    elif request.method == 'GET':
+         render_template('register.html', form=form)
 
 @auth.route('/logout')
 @login_required
