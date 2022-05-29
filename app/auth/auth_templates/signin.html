@@ -4,7 +4,7 @@
 
 {% block content%}
 
-<form class="p3" method="POST">
+<form class="p3" method="POST" style="color:#088256">
     {{form.hidden_tag()}}
     <div class="form-group" style="margin-top:30px; font-weight:bold">
         <fieldset>
@@ -21,8 +21,9 @@
         </fieldset>
     </div>
         <div style="background-color:#088256;border-radius:10px">
-        {{form.submit.label (class='btn btn-block btn-info btn-rounded', style='background-color:#088256') }}
+        {{form.submit (class='btn btn-block btn-info btn-rounded', style='background-color:#088256') }}
         </div>
+        <!-- {{ form.submit(class='btn btn-block btn-info') }} -->
 
 </form>
 
