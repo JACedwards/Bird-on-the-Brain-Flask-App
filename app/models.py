@@ -13,23 +13,7 @@ from datetime import datetime
 from uuid import uuid4
 from werkzeug.security import generate_password_hash
 
-class Bird(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    latin_name = db.Column(db.String(100), default='Unkown')
-    created = db.Column(db.DateTime, default=datetime.utcnow())
-    habitat = db.Column(db.String(75))
-    food = db.Column(db.String(75))
-    behaviors = db.Column(db.String(100))
-    weight_g = db.Column(db.Integer)
-    conservation = db.Column(db.String(30))
 
-    # Info may be found at https://www.allaboutbirds.org/guide/browse/taxonomy#
-    #URL's are names are very specific names of birds
-    #could do some general search categories though
-    # following would take user to results for general search for "duck"
-    #having lots of specific duck options
-    #https://www.allaboutbirds.org/news/search/?q=duck
 
 class User(db.Model, UserMixin):
     id = db.Column(db.String(40), primary_key = True)
@@ -51,5 +35,74 @@ class User(db.Model, UserMixin):
         self.password = generate_password_hash(password)
         self.id = str(uuid4())
 
+class Bird(db.Model):
+    id = db.Column(db.String(40), primary_key=True)
+    common_name = db.Column(db.String(100), nullable=False)
+    species = db.Column(db.String(100))
+    city = db.Column(db.String(60))
+    county = db.Column(db.String(50), nullable=False)
+    state = db.Column(db.String(30), nullable=False)
+    date = db.Column(db.DateTime, nullable=False )
+    comments = db.Column(db.String(500))
+    image = db.Column(db.String(500))
+    #use free image hosting site; if hosting site goes down, you are screwed
+    habitat = db.Column(db.String(75))
+    diet = db.Column(db.String(75))
+    behaviors = db.Column(db.String(100))
+    weight_g = db.Column(db.Integer)
+    price =db.Column(db.Float(2))
+    conservation = db.Column(db.String(30))
+    created_on = db.Column(db.DateTime, default=datetime.utcnow())
+
+
+    def __init__(self, dict):
+        self.id = str(uuid4())
+        self.common_name = dict['common_name'].title()
+        self.county = dict['county'].title()
+        self.state = dict['state'].title()
+        self.date = dict['date']
+        #optional
+        self.species = dict.get('species')
+        self.city = dict.get('city')
+        self.comments = dict.get('comments')
+        self.image = dict.get('image')
+        self.habitat = dict.get('habitat')
+        self.diet = dict.get('diet')
+        self.behaviors = dict.get('behaviors')
+        self.weight_g = dict.get('weight_g')
+        self.price = dict.get('price')
+        self.conservation = dict.get('conservation')
+
+#Jsonify object to a dictionary
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'common_name': self.common_name,
+            'country,': self.county,
+            'state': self.state,
+            'date': self.date,
+            'species': self.species,
+            'city': self.city,
+            'comments': self.comments,
+            'image': self.image,
+            'habitat': self.habitat,
+            'diet': self.diet,
+            'behaviors': self.behaviors,
+            'weight_g': self.weight_g,
+            'price': self.price,
+            'conservation': self.conservation,
+            'created_on' : self.created_on
+        }
+
+
+
+
+
+    # Info may be found at https://www.allaboutbirds.org/guide/browse/taxonomy#
+    #URL's are names are very specific names of birds
+    #could do some general search categories though
+    # following would take user to results for general search for "duck"
+    #having lots of specific duck options
+    #https://www.allaboutbirds.org/news/search/?q=duck
 
 
