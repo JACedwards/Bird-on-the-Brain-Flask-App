@@ -26,7 +26,8 @@ class User(db.Model, UserMixin):
     city = db.Column(db.String(40))
     state = db.Column(db.String(20)) 
     county = db.Column(db.String(40)) 
-    birding_group = db.Column(db.String(150)) 
+    birding_group = db.Column(db.String(150))
+    api_token = db.Column(db.String(100)) 
 
 
     def __init__(self, username, email, password):

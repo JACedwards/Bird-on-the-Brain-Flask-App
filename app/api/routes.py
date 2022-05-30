@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 api = Blueprint('api', __name__, url_prefix='/api')
 from app.models import Bird, db
+from .services import token_required
 
 @api.route('/birds', methods=['GET'])
 def getBirds():
@@ -19,6 +20,7 @@ def getAnimalName(name):
     return jsonify({'error':f"{name.title()} is not present in the database"}), 404
 
 @api.route('/create', methods=['POST'])
+@token_required
 def createBird():
     try:
         newdict = request.get_json()
@@ -35,6 +37,7 @@ def createBird():
     return jsonify({'created':a.to_dict()}), 200
 
 @api.route('/update/<string:id>', methods = ['POST'])
+@token_required
 def updateBird(id):
     try:    
         newvals = request.get_json()
@@ -49,6 +52,7 @@ def updateBird(id):
 
 
 @api.route('/delete/<string:id>', methods=['DELETE'])
+@token_required
 def removeBird(id):
     bird = Bird.query.get(id)
     if not bird:
