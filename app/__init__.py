@@ -7,6 +7,7 @@ from .api.routes import api
 from .models import db, login
 from flask_migrate import Migrate
 
+
   
 
 app = Flask(__name__)

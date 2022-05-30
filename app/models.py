@@ -37,8 +37,8 @@ class User(db.Model, UserMixin):
 
 class Bird(db.Model):
     id = db.Column(db.String(40), primary_key=True)
-    common_name = db.Column(db.String(100), nullable=False)
-    species = db.Column(db.String(100))
+    common_name = db.Column(db.String(100), nullable=False, unique=True)
+    latin_name = db.Column(db.String(100))
     city = db.Column(db.String(60))
     county = db.Column(db.String(50), nullable=False)
     state = db.Column(db.String(30), nullable=False)
@@ -62,7 +62,7 @@ class Bird(db.Model):
         self.state = dict['state'].title()
         self.date = dict['date']
         #optional
-        self.species = dict.get('species')
+        self.latin_name = dict.get('latin_name')
         self.city = dict.get('city')
         self.comments = dict.get('comments')
         self.image = dict.get('image')
@@ -81,7 +81,7 @@ class Bird(db.Model):
             'country,': self.county,
             'state': self.state,
             'date': self.date,
-            'species': self.species,
+            'latin_name': self.latin_name,
             'city': self.city,
             'comments': self.comments,
             'image': self.image,
@@ -94,7 +94,13 @@ class Bird(db.Model):
             'created_on' : self.created_on
         }
 
+    def from_dict(self, dict):
+        for key in dict:
+            getattr(self, key) 
+            setattr(self, key, dict[key])
 
+
+        
 
 
 
