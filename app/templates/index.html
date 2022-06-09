@@ -5,7 +5,7 @@
     {% endblock title %}
 </head>
 
-<body>
+<body >
     {% block header %}
 
  
@@ -13,7 +13,8 @@
 
     {% block content %}
 
-    <table style="margin-top:10px;border:none">
+  
+        <table style="margin-top:10px;border:none;margin-left:auto;margin-right:auto">
         <tr>
             <td> <img class='img-fluid' style="width:100px;height:150px" src="static/images/bluejay_portrait.jpg" alt='bluejay_portrait' /></td>
             <td> <img class='img-fluid' style="width:128px;height:150px" src="static/images/hummer_landscape.jpg" alt='hummer_landscape' /></td>
@@ -22,18 +23,89 @@
         </tr>
     </table>
 
-    <br>
-    <br>
-    <p><b>I chose to substitute a birding theme for the Marvel complete flask app assignment:</b></p>
-    <p>The app includes required elements, such as the following:</p>
-    <ul>
-        <li>Signup functionality</li>
-        <li>Signin functionality</li>
-        <li>API database</li>
-        <li>CRUD</li>
-        <li>Tokenization</li>
-    </ul>
-    {% endblock content %}
 
+    <br>
+    <br>
+    
+    <h3><b>Bird<span style="font-size:9px">on the</span>Brain:  </b></span><span style="font-size:25px">Everything a Birder Could Want -- All in One Nest</span></h3>  
+    <h4>Core Functionality</h4>
+    <ul>
+        <li><b>Signup</b></li>
+        <li><b>Signin</b></li>
+        <li><b>Signin</b></li>
+        <li><b>Blog</b></li>
+        <li><b>Data Sourced from Users</b></li> 
+            <ul>
+                <li style="text-decoration: underline">Siting Lists:</li> 
+                    <ul>
+                        <li>Backyard</li>
+                        <li>Individual Outing</li>
+                        <li>Annual</li>
+                        <li>Lifetime</li>
+                    </ul>       
+                <li style="text-decoration: underline">List Functions:</li>
+                    <ul>
+                        <li>Create</li>
+                        <li>Read</li>
+                        <li>Update</li>
+                        <li>Delete</li>
+                    </ul>      
+                <li style="text-decoration: underline">List Content for Each Bird Siting:</li>
+                    <ul>
+                        <li>common name of bird</li>
+                        <li>county</li>
+                        <li>state</li>
+                        <li>date</li>
+                        <li>comments (optional)</li>
+                        <li>image (maybe)</li>
+                    </ul>
+                <li style="text-decoration: underline">Searches:  Users can search other users' data, using filters like the following:</li>
+                    <ul>
+                        <li>Name of user</li>
+                        <li>County of user</li>
+                        <li>State of user</li>
+                        <li>Name of bird</li>
+                        <li>Dates of sitings</li>
+                    </ul>
+            </ul>
+        <li><b>Data Sourced from eBird API:  Cornell's database can allow users to search for info like the following</b></li>
+        <ul>
+            <li>Most recent siting of specific bird in given geographical region (city, county, state, country)</li>
+            <li>Locations of birding sights most visited by area birders</li>
+            <li>List of "interesting" birds cited in given geographical area</li>
+            <li>Behaviors</li>
+            <li>Average Weight</li>
+            <li>Conservation Status (e.g., endangered)</li>
+            <li>List of citing "hotspots" nearby</li>
+        </ul>
+        <li><b>Links to Major Birding Websites</b></li>
+        <ul>
+            <li>Merlin</li>
+            <li>eBird</li>
+            <li>etc.</li>
+        </ul>
+    </ul>
+
+        
+    <h4>Technologies / Languages  / Methods Used:</h4>
+        <ul>
+            <li>Flask</li>
+            <li>Python</li>
+            <li>Jinja</li>
+            <li>SQL Database</li>
+            <li>API Calls To: Internal and External Databases</li>
+            <li>HTML</li>
+            <li>CSS</li>
+</ul>
+    <h4>Additional Functionality as Time Permits:</h4>
+    <ul>
+        <li>Connect to free image hosting site to allow users to upload profile pics and pics of birds they've sited</li>
+        <li>Bird Fact of the Day</li>
+        <li>Bird Pic of the day</li>
+        <li>Bird Game (maybe hangman with only bird names</li>
+        <li>Users can click on bird name as they add to their list to get more info on that bird (still looking for API)</li>
+    </ul>
+
+    {% endblock content %}
 </body>
 
