@@ -51,7 +51,7 @@ def register():
             return redirect(url_for('auth.register'))
 
     elif request.method == 'GET':
-         render_template('register.html', form=form)
+        return render_template('register.html', form=form)
 
 @auth.route('/logout')
 @login_required
