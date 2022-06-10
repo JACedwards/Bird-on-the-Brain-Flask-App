@@ -37,7 +37,12 @@ class User(db.Model, UserMixin):
         self.id = str(uuid4())
 
 class Bird(db.Model):
-    id = db.Column(db.String(40), primary_key=True)
+    # *****See code at bottom to help with this issue?  
+    # Is ID below the same as User Id or is ti id for bird sighting row? 
+    # Might NEED to ADD ID of User who made this sighting 
+    # Christopher gave me some code in slack too****
+
+    bird_id = db.Column(db.String(40), primary_key=True)
     common_name = db.Column(db.String(100), nullable=False, unique=True)
     latin_name = db.Column(db.String(100))
     city = db.Column(db.String(60))
@@ -46,7 +51,7 @@ class Bird(db.Model):
     date = db.Column(db.DateTime, nullable=False )
     comments = db.Column(db.String(500))
     image = db.Column(db.String(500))
-    #use free image hosting site; if hosting site goes down, you are screwed
+    #use free image hosting site; but if hosting site goes down, you are screwed
     habitat = db.Column(db.String(75))
     diet = db.Column(db.String(75))
     behaviors = db.Column(db.String(100))
@@ -57,7 +62,7 @@ class Bird(db.Model):
 
 
     def __init__(self, dict):
-        self.id = str(uuid4())
+        self.bird_id = str(uuid4())
         self.common_name = dict['common_name'].title()
         self.county = dict['county'].title()
         self.state = dict['state'].title()
@@ -77,7 +82,7 @@ class Bird(db.Model):
 #Jsonify object to a dictionary
     def to_dict(self):
         return {
-            'id': self.id,
+            'bird_id': self.bird_id,
             'common_name': self.common_name,
             'country,': self.county,
             'state': self.state,
@@ -112,4 +117,27 @@ class Bird(db.Model):
     #having lots of specific duck options
     #https://www.allaboutbirds.org/news/search/?q=duck
 
+
+# class Post(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.String(80), nullable=False)
+#     body = db.Column(db.Text, nullable=False)
+#     pub_date = db.Column(db.DateTime, nullable=False,
+#         default=datetime.utcnow)
+
+#     category_id = db.Column(db.Integer, db.ForeignKey('category.id'),
+#         nullable=False)
+#     category = db.relationship('Category',
+#         backref=db.backref('posts', lazy=True))
+
+#     def __repr__(self):
+#         return '<Post %r>' % self.title
+
+
+# class Category(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(50), nullable=False)
+
+#     def __repr__(self):
+#         return '<Category %r>' % self.name
 
