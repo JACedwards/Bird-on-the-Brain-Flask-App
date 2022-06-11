@@ -3,11 +3,13 @@ api = Blueprint('api', __name__, url_prefix='/api')
 from app.models import Bird, db
 from .services import token_required
 
+# SCREWED WITH THIS WRAp and got it to work.  The change was so that jason data was a list of dictionaries.
 @api.route('/birds', methods=['GET'])
 def getBirds():
-    birds = Bird.query.all()
-    print(birds)
-    birds = {a.bird_id: a.to_dict() for a in birds}
+    # birds = Bird.query.all()
+    # print(birds)
+    birds = [bird.to_dict() for bird in Bird.query.all()]
+
     return jsonify(birds), 200
 
 @api.route('/bird/<string:name>', methods=['GET'])
