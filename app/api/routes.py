@@ -7,7 +7,7 @@ from .services import token_required
 def getBirds():
     birds = Bird.query.all()
     print(birds)
-    birds = {a.id: a.to_dict() for a in birds}
+    birds = {a.bird_id: a.to_dict() for a in birds}
     return jsonify(birds), 200
 
 @api.route('/bird/<string:name>', methods=['GET'])
