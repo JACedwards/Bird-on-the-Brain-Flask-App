@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-from flask_login import LoginManager,UserMixin
+from flask_login import LoginManager, UserMixin
 login = LoginManager()
 
 @login.user_loader
@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(100), nullable=False, unique=True)
     first_name = db.Column(db.String(100))
     last_name = db.Column(db.String(100))
-    password = db.Column(db.String(200))
+    password = db.Column(db.String(255), nullable=False)
     created = db.Column(db.DateTime, default=datetime.utcnow())
     city = db.Column(db.String(40))
     state = db.Column(db.String(20)) 
@@ -30,11 +30,15 @@ class User(db.Model, UserMixin):
     api_token = db.Column(db.String(100)) 
 
 
-    def __init__(self, username, email, password):
+    def __init__(self, username, email, password, first_name='', last_name=''):
         self.username = username
         self.email = email.lower() 
-        self.password = generate_password_hash(password)
+        self.first_name = first_name.title()
+        self.last_name = last_name.title()
         self.id = str(uuid4())
+        self.password = generate_password_hash(password)
+
+
 
 class Bird(db.Model):
     # *****See code at bottom to help with this issue?  
