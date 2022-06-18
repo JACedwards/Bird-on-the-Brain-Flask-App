@@ -8,6 +8,7 @@ from flask import render_template
 
 def home():
     birds = ['Junco', 'Blue Bird', 'Hawk']
+    print("Homepage is loading")
     return render_template('index.html', birds=birds)
 
 @app.route('/signup')

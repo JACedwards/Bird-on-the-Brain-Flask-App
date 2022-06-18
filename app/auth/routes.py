@@ -18,10 +18,10 @@ def login():
             if user and check_password_hash(user.password, lform.password.data):
                 login_user(user)
                 print('current user:', current_user.__dict__)
-                flash(f'Success -- You have been signed in, {user.username}.', 'success')
+                flash(f'Success -- You have been signed in, {user.username}.', category = 'success')
                 return redirect(url_for('home'))
 
-        flash("Incorrect name or password.  Please try again.", 'danger')
+        flash("Incorrect name or password.  Please try again.", category = 'danger')
         return redirect(url_for('auth.login'))
         
     return render_template('signin.html', form = lform)
@@ -44,10 +44,10 @@ def register():
                 return redirect(url_for('auth.register'))
 
             login_user(newuser)
-            flash(f'Welcome, {newuser.username}! Thank you for signing up!', 'info')
+            flash(f'Welcome, {newuser.username}! Thank you for signing up!', category = 'info')
             return redirect(url_for('home'))
         else:
-            flash("Sorry, your passwords don't match.  Please try again.", 'danger')
+            flash("Sorry, your passwords don't match.  Please try again.", category = 'danger')
             return redirect(url_for('auth.register'))
 
     elif request.method == 'GET':
@@ -57,6 +57,6 @@ def register():
 @login_required
 def logout():
     logout_user()
-    flash('You have been signed out.', 'info')
+    flash('You have been signed out.', category = 'info')
     return redirect(url_for('auth.login'))
 
