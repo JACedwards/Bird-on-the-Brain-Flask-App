@@ -1,3 +1,4 @@
+from __future__ import with_statement
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -29,7 +30,6 @@ class User(db.Model, UserMixin):
     birding_group = db.Column(db.String(150))
     api_token = db.Column(db.String(100)) 
 
-
     def __init__(self, username, email, password, first_name='', last_name=''):
         self.username = username
         self.email = email.lower() 
@@ -38,14 +38,13 @@ class User(db.Model, UserMixin):
         self.id = str(uuid4())
         self.password = generate_password_hash(password)
 
-
-
 class Bird(db.Model):
     # *****See code at bottom to help with this issue?  
     # Is ID below the same as User Id or is ti id for bird sighting row? 
-    # Might NEED to ADD ID of User who made this sighting 
+    # ********** Might NEED to ADD ID of User who made this sighting******* 
     # Christopher gave me some code in slack too****
 
+    # user_id = db.Column(db.String(40))
     bird_id = db.Column(db.String(40), primary_key=True)
     common_name = db.Column(db.String(100), nullable=False, unique=True)
     latin_name = db.Column(db.String(100))
@@ -60,12 +59,13 @@ class Bird(db.Model):
     diet = db.Column(db.String(75))
     behaviors = db.Column(db.String(100))
     weight_g = db.Column(db.Integer)
-    price =db.Column(db.Float(2))
+    price =db.Column(db.Float(2))  # the number specified in the Float is the number of decimal places
     conservation = db.Column(db.String(30))
     created_on = db.Column(db.DateTime, default=datetime.utcnow())
 
 
     def __init__(self, dict):
+        # self.user_name = user.id???  Can I access current users id athis point? or does it need to be passed in from the form somehow?
         self.bird_id = str(uuid4())
         self.common_name = dict['common_name'].title()
         self.county = dict['county'].title()
@@ -109,6 +109,9 @@ class Bird(db.Model):
             getattr(self, key) 
             setattr(self, key, dict[key])
 
+    # See below for error handling when try to update Postgress database with this Python code 
+    # when this chages.  (Thiis is at minute 1:00:00 in Flask Video Day5 AM )
+
 
         
 
@@ -145,3 +148,16 @@ class Bird(db.Model):
 #     def __repr__(self):
 #         return '<Category %r>' % self.name
 
+
+# Errors for updating Model from Python to Postgresql:
+
+# Sam Davitt:	2 potential solutions to rejected database migrations
+# 02:39:42	Sam Davitt:	1. delete the migrations folder and try to redo your flask db init
+# 02:39:56	Sam Davitt:	2. delete the alembic table in your database (drop table statement)
+# 02:40:18	Sam Davitt:	that would be for errors relating to rejected migrations based on unrelated histories or similar errors
+# 02:40:54	Sam Davitt:	if you have an error about a rejected migration due to data types not matching or data not matching, you will likely have to remove any data currently in the database (such as our Fennec Fox animal)
+# 02:44:45	Kristen Bieler:	I got an error that says “no module named 'api’. What am I missing?
+# 02:54:21	Sam Davitt:	when changing the datatype of a serial primary key
+# 02:54:39	Sam Davitt:	we must do so manually in our database as SQLAlchemy and flask-migrate always seem to fail at this specific operation
+# 02:55:40	Sam Davitt:	ALTER TABLE animal ALTER COLUMN id TYPE varchar(40);
+# May have to update any modify datatype of primary key column and may have to be done manually in postres database.

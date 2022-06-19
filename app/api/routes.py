@@ -1,7 +1,16 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, render_template, url_for
 api = Blueprint('api', __name__, url_prefix='/api')
 from app.models import Bird, db
 from .services import token_required
+from .apiforms import BirdForm
+
+@api.route('/sighting')
+def postSighting():
+    bform = BirdForm()
+    return render_template('sighting.html', form=bform)
+
+
+
 
 # SCREWED WITH THIS WRAp and got it to work.  The change was so that jason data was a list of dictionaries.
 @api.route('/birds', methods=['GET'])
