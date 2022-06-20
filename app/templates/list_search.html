@@ -1,0 +1,23 @@
+{% extends 'components/layout.html' %}
+
+{% block title %}Search Lists{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+<form class="p-5" method="POST">
+    {{  form.hidden_tag() }}
+    <div class="col-8">
+        <div class="form-group">
+            <fieldset>
+                {{ form.state.label }}
+                {{ form.state(class='form-control', placeholder='State') }}
+            </fieldset>
+
+        {{ form.submit(class='btn btn-primary', style='background-color:#088256;border-radius:10px;width:100%')}}
+    </div>  
+</form>
+
+  {% endblock content %}

@@ -1,12 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>This is sighting.html in the master/app/templates folder</p>
-</body>
-</html>
+{% extends 'components/layout.html' %}
+
+{% block title %}Sightings{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+<form class="p-5" method="POST">
+    {{  form.hidden_tag() }}
+    <div class="col-8">
+        <div class="form-group">
+            <fieldset>
+                {{ form.common_name.label }}
+                {{ form.common_name(class='form-control', placeholder='Be as specific as you can. . .') }}
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <fieldset>
+                {{ form.latin_name.label }}
+                {{ form.latin_name(class='form-control', placeholder='(Optional)') }}
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <fieldset>
+                {{ form.date.label }}
+                {{ form.date(class='form-control', placeholder='Date of sighting. . .') }}
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <fieldset>
+                {{ form.county.label }}
+                {{ form.county(class='form-control', placeholder='County where bird was sighted. . .') }}
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <fieldset>
+                {{ form.state.label }}
+                {{ form.state(class='form-control', placeholder='State in which bird was sighted. . .') }}
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <fieldset>
+                {{ form.comments.label }}
+                {{ form.comments(class='form-control', placeholder='(Optional)') }}
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <fieldset>
+                {{ form.image.label }}
+                {{ form.image(class='form-control', disabled='true', placeholder='(Optional)') }}
+            </fieldset>
+        </div>
+        {{ form.submit(class='btn btn-primary', style='background-color:#088256;border-radius:10px;width:100%')}}
+    </div>  
+</form>
+
+  {% endblock content %}

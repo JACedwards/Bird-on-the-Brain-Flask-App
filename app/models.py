@@ -44,7 +44,7 @@ class Bird(db.Model):
     # ********** Might NEED to ADD ID of User who made this sighting******* 
     # Christopher gave me some code in slack too****
 
-    # user_id = db.Column(db.String(40))
+    user_id = db.Column(db.String(40))
     bird_id = db.Column(db.String(40), primary_key=True)
     common_name = db.Column(db.String(100), nullable=False, unique=True)
     latin_name = db.Column(db.String(100))
@@ -65,11 +65,11 @@ class Bird(db.Model):
 
 
     def __init__(self, dict):
-        # self.user_name = user.id???  Can I access current users id athis point? or does it need to be passed in from the form somehow?
+        
         self.bird_id = str(uuid4())
-        self.common_name = dict['common_name'].title()
-        self.county = dict['county'].title()
-        self.state = dict['state'].title()
+        self.common_name = dict['common_name']
+        self.county = dict['county']
+        self.state = dict['state']
         self.date = dict['date']
         #optional
         self.latin_name = dict.get('latin_name')

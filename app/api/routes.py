@@ -1,13 +1,58 @@
-from flask import Blueprint, jsonify, request, render_template, url_for
+from flask import Blueprint, jsonify, request, render_template, url_for, flash, redirect
 api = Blueprint('api', __name__, url_prefix='/api')
 from app.models import Bird, db
 from .services import token_required
-from .apiforms import BirdForm
+from .apiforms import BirdForm, ListSearchForm
+from flask_login import current_user
 
-@api.route('/sighting')
+
+# leaving out validate on submit for now
+@api.route('/sighting', methods=['GET', 'POST'])
 def postSighting():
     bform = BirdForm()
-    return render_template('sighting.html', form=bform)
+    if request.method == 'POST':
+        
+        sighting=bform.data
+        id=current_user.id
+        sighting['user_id']=id
+        bird = Bird(sighting)
+        db.session.add(bird)
+        db.session.commit()
+        flash(f'{bird.common_name} has been added to your list.', category = 'success')        
+        return redirect(url_for('api.postSighting'))
+    else:
+        return render_template('sighting.html', form=bform)
+
+
+
+@api.route('/list_search', methods=['GET', 'POST'])
+def internalSearch():
+    # return 'This is the list search page'
+    lsform = ListSearchForm()
+
+    if request.method == 'POST':
+        
+        ls_search=lsform.data
+
+        # id=current_user.id
+        # sighting['user_id']=id
+        search_input = Bird(ls_search)
+        # the above results in state that was input into form
+        search_results = Bird.query.filter_by(state=search_input.state).all()
+        # print(search_results[0].common_name)
+
+        return render_template('list_search_results.html', form = search_results) 
+
+        # list_search = Bird.query.filter_by(species=name.title()).first()
+
+
+        # flash(f'{bird.common_name} has been added to your list.', category = 'success')        
+        # return redirect(url_for('api.postSighting'))
+    else:
+        # return render_template('list_search', form=lssearch)
+        return render_template('list_search.html', form=lsform)
+
+
 
 
 
