@@ -15,7 +15,10 @@ def postSighting():
         sighting=bform.data
         id=current_user.id
         sighting['user_id']=id
+        print(sighting)
         bird = Bird(sighting)
+        print(bird)
+        print(bird.user_id, bird.common_name)
         db.session.add(bird)
         db.session.commit()
         flash(f'{bird.common_name} has been added to your list.', category = 'success')        

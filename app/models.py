@@ -62,10 +62,19 @@ class Bird(db.Model):
     price =db.Column(db.Float(2))  # the number specified in the Float is the number of decimal places
     conservation = db.Column(db.String(30))
     created_on = db.Column(db.DateTime, default=datetime.utcnow())
+    outing = db.Column(db.String(100))
+    backyard = db.Column(db.String(10))
+    annual = db.Column(db.String(10))
+    lifetime = db.Column(db.String(10))
+
+
+
+
 
 
     def __init__(self, dict):
         
+        self.user_id=dict['user_id']
         self.bird_id = str(uuid4())
         self.common_name = dict['common_name']
         self.county = dict['county']
@@ -82,6 +91,10 @@ class Bird(db.Model):
         self.weight_g = dict.get('weight_g')
         self.price = dict.get('price')
         self.conservation = dict.get('conservation')
+        self.outing = dict.get('outing')
+        self.backyard = dict.get('backyard')
+        self.annual = dict.get('annual')
+        self.lifetime = dict.get('lifetime')
 
 #Jsonify object to a dictionary
     def to_dict(self):
