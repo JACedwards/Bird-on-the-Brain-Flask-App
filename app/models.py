@@ -70,16 +70,13 @@ class Bird(db.Model):
     annual = db.Column(db.String(10))
     lifetime = db.Column(db.String(10))
 
-
     def __init__(self, dict):
         
-        self.user_id=dict['user_id']
+        self.user_id=dict.get('user_id')
         self.bird_id = str(uuid4())
-        self.common_name = dict['common_name']
-        self.county = dict['county']
-        self.state = dict['state']
-
-
+        self.common_name = dict.get('common_name')
+        self.county = dict.get('county')
+        self.state = dict.get('state')
         #optional
         self.latin_name = dict.get('latin_name')
         self.date = dict.get('date')
@@ -127,7 +124,18 @@ class EBirdSearch(db.Model):
         self.checklist = dict.get('checklist')  
         self.locName = dict.get('locName')  
 
+# class AnnualList(db.Model):
+#     annual = db.Column(db.String(10), primary_key=True)
+#     lifetime = db.Column(db.String(10)) 
+#     backyard = db.Column(db.String(10)) 
+#     outing = db.Column(db.String(10))
+     
 
+#     def __init__(self, annual, lifetime, backyard, outing):
+#         self.annual = annual
+#         self.lifetime = lifetime 
+#         self.backyard = backyard
+#         self.outing = outing
 
 
 

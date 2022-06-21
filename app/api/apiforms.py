@@ -46,3 +46,10 @@ class EbirdSearchForm(FlaskForm):
     checklist = StringField('Checklists')
     locName = StringField('Location')
     submit = SubmitField()
+
+class AnnualListForm(FlaskForm):
+    annual = StringField('Annual')
+    lifetime = StringField('Lifetime')
+    backyard = StringField('Backyard')
+    outing = StringField('Outing')
+    submit = SubmitField()

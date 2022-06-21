@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, render_template, url_for, flash, 
 api = Blueprint('api', __name__, url_prefix='/api')
 from app.models import Bird, db, EBirdSearch
 from .services import token_required
-from .apiforms import BirdForm, ListSearchForm, EbirdSearchForm
+from .apiforms import BirdForm, ListSearchForm, EbirdSearchForm, AnnualListForm
 from flask_login import current_user
 from ebird.api import get_region, get_adjacent_regions, get_regions, get_observations
 import requests as r
@@ -45,40 +45,55 @@ def postSighting():
 
 
 
+@api.route('/annual_list', methods=['GET', 'POST'])
+def getAnnualList():
+    
+    
+    
+    
+    galform = AnnualListForm()
+
+    if request.method == 'POST':
+        
+        gal_search=galform.data
+        print('this is gal_search', gal_search)
+        for k , v in gal_search.items():
+            if v == '':
+                which_list = k
+        
+        # search_input = Bird(gal_search)
+        # print('this is search_input.annual', search_input.annual)
+        search_results = Bird.query.filter_by(annual=which_list).all()
+        print('this is search results', search_results)
+
+        # return 'testing'
+           
+        return render_template('annual_list_results.html', form = search_results) 
+
+    else:
+      
+        return render_template('annual_list.html', form=galform)
+
+
+
 
 
 @api.route('/list_search', methods=['GET', 'POST'])
 def internalSearch():
     # return 'This is the list search page'
     lsform = ListSearchForm()
-
     # *******Right now this is only set up to search Bird Sighting database by state coloumn*********
-    #     Also, only tested with state that had only one row, so will need to create loop on templates page as well.
-
     if request.method == 'POST':
         
         ls_search=lsform.data
         print(ls_search)
 
-        # id=current_user.id
-        # sighting['user_id']=id
         search_input = Bird(ls_search)
-        # the above results in state that was input into form
+
         search_results = Bird.query.filter_by(state=search_input.state).all()
-        # print(search_results[0].common_name, search_results[1].common_name)
-        # print('test')
-        # print(search_results)
-        # for i in search_results:
-        #     print(i.state)
 
-        
-        
-        
+
         return render_template('list_search_results.html', form = search_results) 
-
-
-
-
         # flash(f'{bird.common_name} has been added to your list.', category = 'success')        
         # return redirect(url_for('api.postSighting'))
     else:
