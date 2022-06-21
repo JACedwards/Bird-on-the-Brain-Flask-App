@@ -1,0 +1,29 @@
+{% extends 'components/layout.html' %}
+
+{% block title %}Ebird Search{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+
+
+<form class="p-5" method="POST">
+    {{  form.hidden_tag() }}
+    <div class="col-8">
+        <div class="form-group">
+            <fieldset>
+                {{ form.county.label }}
+                {{ form.county(class='form-control', placeholder='County') }}
+            </fieldset>
+            <fieldset>
+                {{ form.days.label }}
+                {{ form.days(class='form-control', placeholder='For the last how many days?') }}
+            </fieldset>
+
+        {{ form.submit(class='btn btn-primary mt-5', style='background-color:#088256;border-radius:10px;width:100%')}}
+    </div>  
+</form>
+
+{% endblock content %}

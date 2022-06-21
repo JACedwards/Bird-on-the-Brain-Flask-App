@@ -68,10 +68,6 @@ class Bird(db.Model):
     lifetime = db.Column(db.String(10))
 
 
-
-
-
-
     def __init__(self, dict):
         
         self.user_id=dict['user_id']
@@ -95,6 +91,37 @@ class Bird(db.Model):
         self.backyard = dict.get('backyard')
         self.annual = dict.get('annual')
         self.lifetime = dict.get('lifetime')
+
+
+class EBirdSearch(db.Model):
+
+    country = db.Column(db.String(40), primary_key=True)  
+    state = db.Column(db.String(40))  
+    county = db.Column(db.String(40))  
+    obsDate = db.Column(db.String(40))  
+    days = db.Column(db.String(40))  
+    hotspots = db.Column(db.String(40))  
+    interesting = db.Column(db.String(40))  
+    comName = db.Column(db.String(40))  
+    checklist = db.Column(db.String(40))  
+    locName = db.Column(db.String(40))  
+
+    def __init__(self, dict):
+        
+        self.country = dict.get('country')  
+        self.state = dict.get('state')  
+        self.county = dict.get('county')  
+        self.obsDate = dict.get('obsDate')  
+        self.days = dict.get('days')  
+        self.hotspots = dict.get('hotspots')  
+        self.interesting = dict.get('interesting')  
+        self.comName = dict.get('comName')  
+        self.checklist = dict.get('checklist')  
+        self.locName = dict.get('locName')  
+
+
+
+
 
 #Jsonify object to a dictionary
     def to_dict(self):

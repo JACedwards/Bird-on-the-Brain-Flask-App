@@ -1,9 +1,11 @@
 from flask import Blueprint, jsonify, request, render_template, url_for, flash, redirect
 api = Blueprint('api', __name__, url_prefix='/api')
-from app.models import Bird, db
+from app.models import Bird, db, EBirdSearch
 from .services import token_required
-from .apiforms import BirdForm, ListSearchForm
+from .apiforms import BirdForm, ListSearchForm, EbirdSearchForm
 from flask_login import current_user
+from ebird.api import get_region, get_adjacent_regions, get_regions, get_observations
+import requests as r
 
 
 # leaving out validate on submit for now
@@ -33,6 +35,9 @@ def internalSearch():
     # return 'This is the list search page'
     lsform = ListSearchForm()
 
+    # *******Right now this is only set up to search Bird Sighting database by state coloumn*********
+    #     Also, only tested with state that had only one row, so will need to create loop on templates page as well.
+
     if request.method == 'POST':
         
         ls_search=lsform.data
@@ -54,6 +59,37 @@ def internalSearch():
     else:
         # return render_template('list_search', form=lssearch)
         return render_template('list_search.html', form=lsform)
+
+
+
+
+
+
+
+@api.route('/ebird_search', methods=['GET', 'POST'])
+def eBirdSearchFunction():
+    
+    ebform = EbirdSearchForm()
+
+    if request.method == 'POST':
+                
+        eb_search=ebform.data
+        # print(eb_search)  **[this prints dictionary of input]
+        # print(eb_search.county, eb_search.days)
+
+        eb_search_input=EBirdSearch(eb_search)
+        # print(eb_search_input)
+        # print(eb_search_input.county, eb_search_input.days)
+
+
+        search_results = get_observations('bdhdkslf0ktt', f'US-IN-{eb_search_input.county}', back=eb_search_input.days)
+        print(search_results)
+
+        return render_template('ebird_search_results.html', form = search_results) 
+
+    return render_template('ebird_search.html', form=ebform)
+
+
 
 
 

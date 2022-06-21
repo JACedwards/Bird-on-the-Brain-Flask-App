@@ -23,3 +23,16 @@ class ListSearchForm(FlaskForm):
     comments = StringField('Notes')
     image = StringField('Image')
     submit = SubmitField()
+
+class EbirdSearchForm(FlaskForm):
+    country = StringField('Country')
+    state = StringField('State')
+    county = StringField('County')
+    obsDate = StringField('Date')
+    days = StringField('Days')
+    hotspots = StringField('Hotspots')
+    interesting = StringField('Interesting Birds')
+    comName = StringField('Bird')
+    checklist = StringField('Checklists')
+    locName = StringField('Location')
+    submit = SubmitField()
