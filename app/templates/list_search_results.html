@@ -18,19 +18,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">
-            {{ form[0].common_name}}
-        </th>
-        <td>
-            {{ form[0].county}}
-        <td>
-            {{ form[0].state}}
-        </td>
-        <td>
-            {{ form[0].date}}
-        </td>
-      </tr>
+
+      
+      {% for x in form %}
+            <tr>
+                <th scope="row">
+                    {{ x.common_name}}
+                </th>
+                <td>
+                    {{ x.county}}
+                <td>
+                    {{ x.state}}
+                </td>
+                <td>
+                    {{ x.date}}
+                </td>
+            </tr>
+      {% endfor %}
+
     </tbody>
   </table>
 

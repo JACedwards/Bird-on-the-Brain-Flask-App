@@ -8,9 +8,6 @@ from ebird.api import get_region, get_adjacent_regions, get_regions, get_observa
 import requests as r
 
 
-
-
-
 # leaving out validate on submit for now
 @api.route('/sighting', methods=['GET', 'POST'])
 def postSighting():
@@ -20,38 +17,16 @@ def postSighting():
         sighting=bform.data
         id=current_user.id
         sighting['user_id']=id
-
-        print('test')
-        print(sighting)
-
+        # print(sighting)
         bird = Bird(sighting)
         # print(bird)
         # print(bird.user_id, bird.common_name)
         db.session.add(bird)
         db.session.commit()
-
-        search_input=Bird.query.filter_by(common_name=bird.common_name).first()
-        print(search_input.annual)
-        if search_input.annual==None:
-            search_output=search_input.__dict__
-            search_output['annual']='annual'
-            print(search_output)
-            annual_bird=Bird(search_output)
-            db.session.add(annual_bird)
-            db.session.commit()
-        # db.session.add(search_input)
-        # db.session.commit()
-
-        flash(f'{bird.common_name} has been added to your lists.', category = 'success')
-                
+        flash(f'{bird.common_name} has been added to your list.', category = 'success')        
         return redirect(url_for('api.postSighting'))
     else:
         return render_template('sighting.html', form=bform)
-
-
-
-
-
 
 
 

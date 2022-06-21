@@ -46,12 +46,15 @@ class Bird(db.Model):
 
     user_id = db.Column(db.String(40))
     bird_id = db.Column(db.String(40), primary_key=True)
-    common_name = db.Column(db.String(100), nullable=False, unique=True)
+    common_name = db.Column(db.String(100), nullable=False)
     latin_name = db.Column(db.String(100))
     city = db.Column(db.String(60))
     county = db.Column(db.String(50), nullable=False)
     state = db.Column(db.String(30), nullable=False)
-    date = db.Column(db.DateTime, nullable=False )
+    date = db.Column(db.String(30))
+    date_year = db.Column(db.String(5), nullable=False )
+    date_month = db.Column(db.String(5), nullable=False )
+    date_day = db.Column(db.String(5), nullable=False )
     comments = db.Column(db.String(500))
     image = db.Column(db.String(500))
     #use free image hosting site; but if hosting site goes down, you are screwed
@@ -75,9 +78,11 @@ class Bird(db.Model):
         self.common_name = dict['common_name']
         self.county = dict['county']
         self.state = dict['state']
-        self.date = dict['date']
+
+
         #optional
         self.latin_name = dict.get('latin_name')
+        self.date = dict.get('date')
         self.city = dict.get('city')
         self.comments = dict.get('comments')
         self.image = dict.get('image')
@@ -91,6 +96,9 @@ class Bird(db.Model):
         self.backyard = dict.get('backyard')
         self.annual = dict.get('annual')
         self.lifetime = dict.get('lifetime')
+        self.date_year = dict.get('date_year')
+        self.date_month = dict.get('date_month')
+        self.date_day = dict.get('date_day')
 
 
 class EBirdSearch(db.Model):
