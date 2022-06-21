@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request, render_template, url_for, flash, redirect
+from pkg_resources import working_set
 api = Blueprint('api', __name__, url_prefix='/api')
 from app.models import Bird, db, EBirdSearch
 from .services import token_required
@@ -49,7 +50,9 @@ def postSighting():
 def getAnnualList():
     
     
-    
+    # Do conditionals here so both annual and lifetime working_set
+    # Ave for later yearfield variable to filter by year
+    # For now, just cheat and only enter 2022 as samples in database
     
     galform = AnnualListForm()
 
@@ -61,14 +64,19 @@ def getAnnualList():
             if v == '':
                 which_list = k
         
+        if which_list == 'annual':
+            search_results = Bird.query.filter_by(annual=which_list).all()
+            print('this is search results', search_results)
+        elif which_list == 'lifetime':
+            search_results = Bird.query.filter_by(lifetime=which_list).all()
+            print('this is search results', search_results)
         # search_input = Bird(gal_search)
         # print('this is search_input.annual', search_input.annual)
-        search_results = Bird.query.filter_by(annual=which_list).all()
-        print('this is search results', search_results)
-
+        
+        
         # return 'testing'
            
-        return render_template('annual_list_results.html', form = search_results) 
+        return render_template('annual_list_results.html', form = search_results,header=which_list ) 
 
     else:
       
