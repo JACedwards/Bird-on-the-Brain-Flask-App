@@ -21,7 +21,7 @@ def login():
                 flash(f'Success -- You have been signed in, {user.username}.', category = 'success')
                 return redirect(url_for('home'))
 
-        flash(f"Incorrect username or password.  Please try again.", category = 'danger')
+        flash(f'Incorrect username or password.  Please try again.', category = 'success')
         return redirect(url_for('auth.login'))
         
     return render_template('signin.html', form = lform)

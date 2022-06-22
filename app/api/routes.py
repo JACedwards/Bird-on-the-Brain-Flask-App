@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request, render_template, url_for, flash, redirect
 from pkg_resources import working_set
+from sqlalchemy import null
 api = Blueprint('api', __name__, url_prefix='/api')
 from app.models import Bird, db, EBirdSearch
 from .services import token_required, getCountyByDate
@@ -20,20 +21,46 @@ def postSighting():
         sighting=bform.data
         id=current_user.id
         sighting['user_id']=id
-        print(sighting)
         bird = Bird(sighting)
+        # **object comprised of form input with addition of user_id
+ 
+        list_bird_dicts = []
+        search_input=Bird.query.filter_by(common_name=bird.common_name).all()
+
+        # **probably need error handling here if query returns empty list?
+        
+        for x in search_input:
+            bird_dict = x.__dict__
+            list_bird_dicts.append(bird_dict)
+                     
+        for x in list_bird_dicts:
+            if x['annual'] == 'annual':
+                a = 'annual'
+                # **no change to bird (object)
+            else:
+                a = None
+
+        
+        if a == None:
+            bird.__dict__['annual']='annual'
+            # input_annual = bird.__dict__
+            # input_annual['annual']='annual'
+
+        # Lifetime Check Starts
+        for y in list_bird_dicts:
+            if y['lifetime'] == 'lifetime':
+                a = 'lifetime'
+            else:
+                a = None
+
+        if a == None:
+            bird.__dict__['lifetime']='lifetime'
+
+       
+        print(bird.__dict__)
+           
         db.session.add(bird)
         db.session.commit()
-
-        search_input=Bird.query.filter_by(common_name=bird.common_name).first()
-        print(search_input.annual)
-        if search_input.annual==None:
-            search_output=search_input.__dict__
-            search_output['annual']='annual'
-            print(search_output)
-            annual_bird=Bird(search_output)
-            db.session.add(annual_bird)
-            db.session.commit()
 
         flash(f'{bird.common_name} has been added to your lists.', category = 'success')
                 
