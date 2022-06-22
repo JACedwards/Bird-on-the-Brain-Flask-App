@@ -7,6 +7,8 @@
 
 {% block content %}
 
+<h3>{{value}} List</h3>
+
 <table class="table">
 
     <thead>
@@ -14,7 +16,7 @@
         <th scope="col">Bird Name</th>
         <th scope="col">County</th>
         <th scope="col">State</th>
-        <th scope="col">Date</th>
+        <th scope="col">Year</th>
       </tr>
     </thead>
     <tbody>
@@ -31,7 +33,7 @@
                     {{ x.state}}
                 </td>
                 <td>
-                    {{ x.date}}
+                    {{ x.date_year}}
                 </td>
             </tr>
       {% endfor %}

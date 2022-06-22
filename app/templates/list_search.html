@@ -6,16 +6,42 @@
 {% endblock header %}
 
 {% block content %}
-
+<div class="col-3"></div>
+    <h3 style="margin-top:30px;margin-left:20px;margin-bottom:0px">Search by <b>One</b> of the Following at a Time</h3>
+</div>
 <form class="p-5" method="POST">
     {{  form.hidden_tag() }}
-    <div class="col-8">
-        <div class="form-group">
+    <div class="col-3">
+        <div class="form-group" style="border:2px solid black; padding:10px">
+            <fieldset>
+                {{ form.common_name.label }}
+                {{ form.common_name(class='form-control', placeholder='Bird Name') }}
+            </fieldset>
+        </div>
+    </div>  
+    <div class="col-3">
+        <div class="form-group" style="border:2px solid black; padding:10px">
+            <fieldset>
+                {{ form.date_year.label }}
+                {{ form.date_year(class='form-control', placeholder='Year') }}
+            </fieldset>
+        </div>
+    </div>  
+    <div class="col-3">
+        <div class="form-group" style="border:2px solid black; padding:10px">
+            <fieldset>
+                {{ form.county.label }}
+                {{ form.county(class='form-control', placeholder='County') }}
+            </fieldset>
+        </div>
+    </div>  
+    <div class="col-3">
+        <div class="form-group" style="border:2px solid black; padding:10px">
             <fieldset>
                 {{ form.state.label }}
                 {{ form.state(class='form-control', placeholder='State') }}
             </fieldset>
-
+        </div>
         {{ form.submit(class='btn btn-primary', style='background-color:#088256;border-radius:10px;width:100%')}}
     </div>  
 </form>

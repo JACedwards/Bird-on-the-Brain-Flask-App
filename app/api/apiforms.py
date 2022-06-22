@@ -23,7 +23,7 @@ class ListSearchForm(FlaskForm):
     user_id = StringField('User Id')
     common_name = StringField('Bird Name')
     latin_name = StringField('Latin Name')
-    date = StringField('Date')
+    date_year = StringField('Year')
     county = StringField('County')
     state = StringField('State')
     comments = StringField('Notes')

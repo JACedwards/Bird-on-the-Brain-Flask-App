@@ -66,10 +66,10 @@ def getAnnualList():
         
         if which_list == 'annual':
             search_results = Bird.query.filter_by(annual=which_list).all()
-            print('this is search results', search_results)
+            # print('this is search results', search_results)
         elif which_list == 'lifetime':
             search_results = Bird.query.filter_by(lifetime=which_list).all()
-            print('this is search results', search_results)
+            # print('this is search results', search_results)
         # search_input = Bird(gal_search)
         # print('this is search_input.annual', search_input.annual)
         
@@ -95,13 +95,27 @@ def internalSearch():
         
         ls_search=lsform.data
         print(ls_search)
+        for k, v in ls_search.items():
+            if v != None and k != 'csrf_token' and v !='' and v != True:
+                
+                which_list = k
+                which_list_value = v
+        
+        if which_list == 'state':
+            search_results = Bird.query.filter_by(state=which_list_value.title()).all()
+            # print('this is search results', search_results)
+        elif which_list == 'common_name':
+            search_results = Bird.query.filter_by(common_name=which_list_value.title()).all()
+            # print('this is search results', search_results)
+        elif which_list == 'date_year':
+            print(which_list_value)
+            search_results = Bird.query.filter_by(date_year=which_list_value).all()
+            # print('this is search results', search_results)
+        elif which_list == 'county':
+            search_results = Bird.query.filter_by(county=which_list_value.title()).all()
+            # print('this is search results', search_results)
 
-        search_input = Bird(ls_search)
-
-        search_results = Bird.query.filter_by(state=search_input.state).all()
-
-
-        return render_template('list_search_results.html', form = search_results) 
+        return render_template('list_search_results.html', form = search_results, key=which_list, value=which_list_value) 
         # flash(f'{bird.common_name} has been added to your list.', category = 'success')        
         # return redirect(url_for('api.postSighting'))
     else:
