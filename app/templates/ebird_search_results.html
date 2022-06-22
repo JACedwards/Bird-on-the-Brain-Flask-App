@@ -6,32 +6,39 @@
 {% endblock header %}
 
 {% block content %}
-
+<h4 style="padding-left:15px;padding-top:20px;padding-bottom:0px;margin-bottom:0px">eBird Observations for {{form_county}} County, Indiana, for the past {{form_days}} days</h4>
+<br style="padding-top:0px;margin-top:0px">
 <table class="table">
 
     <thead>
       <tr>
         <th scope="col">Bird Name</th>
         <th scope="col">Scientific Name</th>
-        <th scope="col">Location</th>
+        <th scope="col">Location*</th>
         <th scope="col">Date</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">
-            {{ form[0].comName}}
-        </th>
-        <td>
-            {{ form[0].sciName}}
-        <td>
-            {{ form[0].locName}}
-        </td>
-        <td>
-            {{ form[0].obsDt}}
-        </td>
-      </tr>
+
+      {% for x in form %}
+        <tr>
+          <th scope="row" style="font-weight:normal">
+              {{ x.comName}}
+          </th>
+          <td>
+              {{ x.sciName}}
+          <td>
+              {{ x.locName}}
+          </td>
+          <td>
+              {{ x.obsDt}}
+          </td>
+        </tr>
+      {% endfor %}
+
     </tbody>
-  </table>
+  </table> 
+  <hr>
+  <p style="padding-left:15px"><small>*These data are crowd-sourced by Cornell University, and there appears to be no standard template for location reporting, which may include identifiers, such as city, landmark, park, zipcode. and/or GPS coordinates</small></p>
 
   {% endblock content %}

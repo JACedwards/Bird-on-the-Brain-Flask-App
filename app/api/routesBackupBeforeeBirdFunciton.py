@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, render_template, url_for, flash, 
 from pkg_resources import working_set
 api = Blueprint('api', __name__, url_prefix='/api')
 from app.models import Bird, db, EBirdSearch
-from .services import token_required, getCountyByDate
+from .services import token_required
 from .apiforms import BirdForm, ListSearchForm, EbirdSearchForm, AnnualListForm
 from flask_login import current_user
 from ebird.api import get_region, get_adjacent_regions, get_regions, get_observations
@@ -123,18 +123,21 @@ def internalSearch():
         return render_template('list_search.html', form=lsform)
 
 
-# def getCountyByDate(county_name, days):
 
-#     """Call to API returning Bird observations for specified county ('county_name') and number of days from present backwards ('days')"""
-#     county_code = get_regions('bdhdkslf0ktt', 'subnational2', 'US-IN')
+def getCountyByDate(county_name, days):
 
-#     for x in county_code:
-#         if x['name'] == county_name:
-#             country_state_county = x['code']
+    """Call to API returning Bird observations for specified county ('county_name') and number of days from present backwards ('days')"""
 
-#     records = get_observations('bdhdkslf0ktt', f'{country_state_county}', back=f"{days}")
-#     print
-#     return records
+    county_code = get_regions('bdhdkslf0ktt', 'subnational2', 'US-IN')
+
+    county_name = 'Grant'
+
+    for x in county_code:
+        if x['name'] == county_name:
+            country_state_county = x['code']
+
+    records = get_observations('bdhdkslf0ktt', f'{country_state_county}', back=f"{days}")
+    return records
 
 
 @api.route('/ebird_search', methods=['GET', 'POST'])
@@ -150,15 +153,13 @@ def eBirdSearchFunction():
 
         eb_search_input=EBirdSearch(eb_search)
         # print(eb_search_input)
-        print(eb_search_input.county, eb_search_input.days)
+        # print(eb_search_input.county, eb_search_input.days)
 
-        search_results = getCountyByDate(eb_search_input.county, eb_search_input.days)
 
-        # ***restore next 3 lines to get to work with county code number as input from form***
-        # search_results = get_observations('bdhdkslf0ktt', f'US-IN-{eb_search_input.county}', back=eb_search_input.days)
-        # print(search_results)
+        search_results = get_observations('bdhdkslf0ktt', f'US-IN-{eb_search_input.county}', back=eb_search_input.days)
+        print(search_results)
 
-        return render_template('ebird_search_results.html', form = search_results, form_county=eb_search_input.county, form_days=eb_search_input.days) 
+        return render_template('ebird_search_results.html', form = search_results) 
 
     return render_template('ebird_search.html', form=ebform)
 

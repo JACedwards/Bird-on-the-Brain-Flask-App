@@ -7,11 +7,12 @@
 
 {% block content %}
 
-
-
-<form class="p-5" method="POST">
+<form class="p-5" method="POST" style="padding-top:-25px; margin-top:-25px">
+   
     {{  form.hidden_tag() }}
     <div class="col-8">
+        <h3>Search eBird Observations for Indiana Counties for the Past 1-30 days</h3>
+        <br>
         <div class="form-group">
             <fieldset>
                 {{ form.county.label }}
@@ -19,7 +20,7 @@
             </fieldset>
             <fieldset>
                 {{ form.days.label }}
-                {{ form.days(class='form-control', placeholder='For the last how many days?') }}
+                {{ form.days(class='form-control', placeholder='0-30') }}
             </fieldset>
 
         {{ form.submit(class='btn btn-primary mt-5', style='background-color:#088256;border-radius:10px;width:100%')}}
