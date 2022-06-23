@@ -43,9 +43,15 @@
                     <a style="color:white" class="nav-link" href="{{url_for('api.internalSearch') }}">Bird Brain Search &nbsp;&#8226;</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{url_for('api.eBirdSearchFunction') }}">eBird Search</a>
+                    <a style="color:white" class="nav-link" href="{{url_for('api.eBirdSearchFunction') }}">eBird Search &nbsp;&#8226;</a>
+                </li>
+                <li class="nav-item active">
+                    <a style="color:white" class="nav-link" href="{{url_for('api.fetchEvilCatFact') }}">The Enemy</a>
                 </li>
             </ul>
+
+
+            
 
             <ul class="navbar-nav ml-auto">
                 {% if current_user.is_authenticated %}
@@ -54,7 +60,7 @@
                 </li>
                 {% else %}
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{ url_for('auth.login') }}">Sign In</a>
+                    <a style="color:white" class="nav-link" href="{{ url_for('auth.login') }}">Sign In &nbsp;&nbsp;&#8226;</a>
                 </li>
                 <li class="nav-item active">
                     <a style="color:white" class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
@@ -63,6 +69,20 @@
             </ul>
         </div>
     </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
 
 
     <table style="margin-top:10px;border:none;margin-left:auto;margin-right:auto">
@@ -90,20 +110,7 @@
             <td> <img class='img-fluid' style="width:94px;height:125px" src="../static/images/blue_yelllow_winter.jpg" alt='Blue and Yellow Fuzzy Bird' /></td>
         </tr>
     </table>
-    
-    
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+
 
     {% block content %}
     {% endblock content %}

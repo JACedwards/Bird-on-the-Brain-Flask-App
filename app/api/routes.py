@@ -2,12 +2,13 @@ from flask import Blueprint, jsonify, request, render_template, url_for, flash, 
 from pkg_resources import working_set
 from sqlalchemy import null
 api = Blueprint('api', __name__, url_prefix='/api')
-from app.models import Bird, db, EBirdSearch
+from app.models import Bird, db, EBirdSearch, EvilCatFact
 from .services import token_required, getCountyByDate
-from .apiforms import BirdForm, ListSearchForm, EbirdSearchForm, AnnualListForm
+from .apiforms import BirdForm, ListSearchForm, EbirdSearchForm, AnnualListForm, EvilCatFactForm
 from flask_login import current_user
 from ebird.api import get_region, get_adjacent_regions, get_regions, get_observations
 import requests as r
+import random
 
 
 
@@ -196,6 +197,26 @@ def eBirdSearchFunction():
     return render_template('ebird_search.html', form=ebform)
 
 
+@api.route('/evil_cat', methods=['GET'])
+def fetchEvilCatFact():
+    
+    data =''
+    data = r.get('https://catfact.ninja/fact')
+    data=data.json()
+
+
+    data_image =''
+    data_image = r.get('https://api.thecatapi.com/v1/images/search')
+    data_image=data_image.json()
+    print(data_image)
+
+    birds =['Ruddy Duck', 'Peacock', 'Wren', 'Blue Jay', 'Osprey', 'Harrier', 'Buzzard', 'Vulture', 'Kite', 'Kestrel', 'Eagle', 'Hawk', 'Falcon', 'Shikra', 'Cardinal', 'Hummingbird', 'Cow Bird', 'Robin', 'Downy Woodpecker']
+    bird_list=random.choice(birds)
+
+    return render_template('evil_cat.html', form=data, image=data_image, random_bird = bird_list)
+
+    # https://catfact.ninja/fact 
+    # https://api.thecatapi.com/v1/images/search
 
 
 

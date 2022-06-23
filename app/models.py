@@ -124,6 +124,12 @@ class EBirdSearch(db.Model):
         self.checklist = dict.get('checklist')  
         self.locName = dict.get('locName')  
 
+
+class EvilCatFact(db.Model):
+    refresh = db.Column(db.String(30), primary_key=True)  
+    def __init__(self, dict):
+        self.refresh = dict.get('refresh') 
+
 # class AnnualList(db.Model):
 #     annual = db.Column(db.String(10), primary_key=True)
 #     lifetime = db.Column(db.String(10)) 

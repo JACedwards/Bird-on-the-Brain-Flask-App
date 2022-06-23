@@ -53,3 +53,7 @@ class AnnualListForm(FlaskForm):
     backyard = StringField('Backyard')
     outing = StringField('Outing')
     submit = SubmitField()
+
+class EvilCatFactForm(FlaskForm):
+    refresh = StringField('Refresh')
+    submit = SubmitField()

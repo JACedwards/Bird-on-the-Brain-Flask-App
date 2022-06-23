@@ -1,0 +1,31 @@
+{% extends 'components/layout.html' %}
+
+{% block title %}Favorite Facts{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<br>
+<h2 style="color:#088256;text-align:center">Feline Facts</h2>
+
+<hr style="border: 5px solid #088256;">
+
+<div class="row justify-content-center">
+    <div class="col-5">
+        <h3 style="text-align:center">The {{ random_bird }}'s favorite fact</h3>
+        <h3 style="text-align:center">about feeble-minded felines</h3>
+        <hr>
+        
+        <p style="font-size:25px"> {{ form.fact }}</p>
+        <hr>
+        <br>
+        <h3 style="text-align:center">The Enemy</h3>
+        <br>
+
+        <img class='img-fluid' style="display: block;margin-left:auto;margin-right:auto;width:100%" src="{{ image[0].url }}" alt='Picture of the Enemy' />
+
+
+    </div>
+</div>
+{% endblock content %}

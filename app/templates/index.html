@@ -12,90 +12,41 @@
 
 
 <br>
-<h3 style="color:#088256"><b>Bird<span style="font-size:9px;color:#088256">on the</span>Brain:  </b></span><span style="font-size:25px">  Booty for Birders</span></h3>
+<h3 style="color:#088256"><b>Bird<span style="font-size:9px;color:#088256">on the</span>Brain:  </b></span><span style="font-size:25px">  Bounty for Birders</span></h3>
 
 <hr style="border: 5px solid #088256">
 
-<h4>Core Functionality</h4>
-<ul>
-    <li><b>Signup</b></li>
-    <li><b>Signin</b></li>
-    <li><b>Signout</b></li>
-    <li><b>Data Sourced from Users</b></li> 
-        <ul>
-            <li style="text-decoration: underline">Sighting Lists:</li> 
-                <ul>
-                    <li>Backyard</li>
-                    <li>Individual Outing</li>
-                    <li>Annual</li>
-                    <li>Lifetime</li>
-                </ul>       
-            <li style="text-decoration: underline">List Functions:</li>
-                <ul>
-                    <li>Create</li>
-                    <li>Read</li>
-                    <li>Update</li>
-                    <li>Delete</li>
-                </ul>      
-            <li style="text-decoration: underline">List Content for Each Bird Sighting:</li>
-                <ul>
-                    <li>common name of bird</li>
-                    <li>county</li>
-                    <li>state</li>
-                    <li>date</li>
-                    <li>comments (optional)</li>
-                    <li>image (maybe)</li>
-                </ul>
-            <li style="text-decoration: underline">Searches:  Users can search other users' data, using filters like the following:</li>
-                <ul>
-                    <li>Name of user</li>
-                    <li>County of user</li>
-                    <li>State of user</li>
-                    <li>Name of bird</li>
-                    <li>Dates of sightings</li>
-                </ul>
-        </ul>
-    <li><b>Data Sourced from eBird API:  Cornell's database can allow users to search for info like the following</b></li>
-    <ul>
-        <li>Most recent sighting of specific bird in given geographical region (city, county, state, country)</li>
-        <li>Locations of birding sites most visited by area birders</li>
-        <li>List of "interesting" birds sighted in given geographical area</li>
-        <li>List of sighting "hotspots" nearby</li>
-        <li>Bird Behaviors</li>
-        <li>Average Weight</li>
-        <li>Conservation Status (e.g., endangered)</li>
 
-    </ul>
-    <li><b>Links to Major Birding Websites</b></li>
-    <ul>
-        <li>Merlin</li>
-        <li>eBird</li>
-    </ul>
-</ul>
 
-    
-<h4>Technologies:</h4>
-    <ul>
-        <li>Flask</li>
-        <li>Python</li>
-        <li>Jinja</li>
-        <li>SQL Database</li>
-        <li>API Calls To: Internal and External Databases</li>
-        <li>HTML</li>
-        <li>CSS</li>
-</ul>
-<h4>Additional Functionality as Time Permits:</h4>
-<ul>
-    <li>Blog</li>
-    <li>Connect to free image hosting site to allow users to upload profile pics and pics of birds they've sighted</li>
-    <li>Bird Fact of the Day</li>
-    <li>Bird Pic of the day</li>
-    <li>Bird Game (maybe hangman with only bird names</li>
-    <li>Users can click on bird name as they add to their list to get more info on that bird (still looking for API)</li>
-</ul>
-<br>
-<br>
-<br>
+<div class="row justify-content-center">
+    <div class="col-4" style="padding-top:20px">
+        <div  style="font-size:25px">
+            <ul>
+                <li>
+                    <a style="color:#088256"  href="{{url_for('api.postSighting') }}">Post a Sighting to Your Personal Lists </a>
+                </li>
+                <li>
+                    <a style="color:#088256"  href="{{url_for('api.getAnnualList') }}">Check Your Annual and Lifetime Lists </a>
+                </li>
+                <li>
+                    <a style="color:#088256"  href="{{url_for('api.internalSearch') }}">Search Your Own & Other Bird Brain's Sighting </a>
+                </li>
+                <li>
+                    <a style="color:#088256"  href="{{url_for('api.eBirdSearchFunction') }}">Search eBird for Area Sightings</a>
+                </li>
+                <li>
+                    <a style="color:#088256"  href="{{url_for('api.fetchEvilCatFact') }}">The Enemy</a>
+                </li>
+            </ul>
+        </div>        
+    </div>
+     
+    <div class="col-7" style="margin-top:30px">
+
+        <img class='img-fluid' style="padding-top:-10px"  src="../static/images/Crane_fish.jpg" alt='bluejay_portrait' />
+
+    </div>
+</div>
 
 {% endblock content %}
 

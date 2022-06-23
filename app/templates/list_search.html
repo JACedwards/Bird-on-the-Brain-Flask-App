@@ -12,19 +12,26 @@
 
 <hr style="border: 5px solid #088256;">
 
-<h4 style="padding-left:62px; padding-bottom:-30px;margin-bottom:-30px;padding-top:10px;margin-top:10px">Search <b>One</b> Field at a Time</h4>
+<table style="margin-left: auto; margin-right: auto">
+    <tr>
+        <td>
+
+
 
 <form class="p-5" method="POST">
     {{  form.hidden_tag() }}
     <div class="col-4">
-        <div class="form-group" style="border:2px solid #088256; padding:10px">
+        
+    
+    
+    <div class="form-group" style="border:2px solid #088256; padding:10px">
             <fieldset>
                 {{ form.common_name.label }}
                 {{ form.common_name(class='form-control', placeholder='Bird Name') }}
             </fieldset>
         </div>
     </div>  
-    <div class="col-4">
+
         <div class="form-group" style="border:2px solid #088256; padding:10px">
             <fieldset>
                 {{ form.date_year.label }}
@@ -32,7 +39,7 @@
             </fieldset>
         </div>
     </div>  
-    <div class="col-4">
+
         <div class="form-group" style="border:2px solid #088256; padding:10px">
             <fieldset>
                 {{ form.county.label }}
@@ -40,7 +47,7 @@
             </fieldset>
         </div>
     </div>  
-    <div class="col-4">
+
         <div class="form-group" style="border:2px solid #088256; padding:10px">
             <fieldset>
                 {{ form.state.label }}
@@ -50,5 +57,12 @@
         {{ form.submit(class='btn btn-primary', style='background-color:#088256;border-radius:10px;width:100%')}}
     </div>  
 </form>
+        </td>
+        <td>
+
+            <img class='img-fluid' style="width:333px;height:500px" src="../static/images/parrot_red.jpg" alt='oriole' />
+
+        </td>
+    </tr>
 
   {% endblock content %}

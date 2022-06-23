@@ -12,27 +12,37 @@
 
 <hr style="border: 5px solid #088256;margin-bottom: -10px;padding-bottom:-10px">
 
-<form class="p-5" method="POST">
-    {{  form.hidden_tag() }}
-    <div class="col-8">
-        <div class="form-check">
-            <fieldset>
-                <br>
-                {{ form.annual(class='form-check-input', type='radio') }}
-                {{ form.annual.label }}
-            </fieldset>
+<div class="row justify-content-center">
+    <form class="p-5" method="POST">
+        {{  form.hidden_tag() }}
+        <div class="col-8">
+            <div class="form-check">
+                <fieldset>
+                    <br>
+                    {{ form.annual(class='form-check-input', type='radio') }}
+                    {{ form.annual.label }}
+                </fieldset>
+            </div>
         </div>
-    </div>
-    <div class="col-8">
-        <div class="form-check">
-            <fieldset>
-                {{ form.lifetime(class='form-check-input', type='radio') }}
-                {{ form.lifetime.label }}
-            </fieldset>
+        <div class="col-8">
+            <div class="form-check">
+                <fieldset>
+                    {{ form.lifetime(class='form-check-input', type='radio') }}
+                    {{ form.lifetime.label }}
+                </fieldset>
+            </div>
         </div>
-    </div>
+        
+        {{ form.submit(class='btn btn-primary', style='background-color:#088256;border-radius:10px;width:100px')}}
+    </form>
     
-    {{ form.submit(class='btn btn-primary', style='background-color:#088256;border-radius:10px;width:100px')}}
-</form>
+    
+    <div class="col-7" style="margin-top:30px">
+
+        <img class='img-fluid' style="padding-top:-10px"  src="../static/images/rainbow_duck.jpg" alt='bluejay_portrait' />
+
+    </div>
+
+</div>
 
   {% endblock content %}

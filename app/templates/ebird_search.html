@@ -12,25 +12,45 @@
 
 <hr style="border: 5px solid #088256;">
 
-<p style="padding-left:62px; padding-bottom:-30px;margin-bottom:-30px;padding-top:10px;margin-top:10px;font-size:20px"><b>eBird includes a crowd-sourced database, maintained by Cornell University</b></p>
+
+
+
+
+
+
+<table style="margin-left:auto; margin-right:auto">
+    <tr>
+        <td>
+<p style="padding-left:62px; padding-bottom:-30px;margin-bottom:-30px;padding-top:10px;margin-top:10px;font-size:20px;text-align:center"><b>eBird: Crowd-Sourced International Database</b></p>
 <br>
+
+
 
 <form class="p-5" method="POST" style="padding-top:-25px; margin-top:-25px">
    
     {{  form.hidden_tag() }}
-    <div class="col-4">
+
         <div class="form-group">
             <fieldset>
                 {{ form.county.label }}
-                {{ form.county(class='form-control', placeholder='Indiana County') }}
+                {{ form.county(class='form-control',  textarea='400px',placeholder='Indiana County') }}
             </fieldset>
             <fieldset>
                 {{ form.days.label }}
-                {{ form.days(class='form-control', placeholder='0-30') }}
+                {{ form.days(class='form-control', textarea='400px',placeholder='0-30') }}
             </fieldset>
 
-        {{ form.submit(class='btn btn-primary mt-5', style='background-color:#088256;border-radius:10px;width:100%')}}
-    </div>  
-</form>
+            {{ form.submit(class='btn btn-primary mt-5', style='background-color:#088256;border-radius:10px;width:100%')}}
+        </form>
+
+</div>
+        </td>
+<td style="padding:40px">
+<div >
+    <img class='img-fluid' style="padding-top:-10px;width:605x;height: 375px"  src="../static/images/snowy.jpg" alt='bluejay_portrait' />
+</div>
+</div>
+</td>
+</tr>
 
 {% endblock content %}
