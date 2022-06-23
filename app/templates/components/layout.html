@@ -29,8 +29,18 @@
                 <li class="nav-item active">
                     {# url_for('route function name') creates a link to that route #}
                     <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{url_for('backyard_list') }}">Backyard List</a>
+                    <a class="nav-link" href="{{url_for('api.postSighting') }}">Add Sighting</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('api.getAnnualList') }}">Annual & Lifetime Lists</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('api.internalSearch') }}">Bird Brain Search</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('api.eBirdSearchFunction') }}">eBird Search</a>
                 </li>
             </ul>
 
@@ -50,6 +60,34 @@
             </ul>
         </div>
     </nav>
+
+    <table style="margin-top:10px;border:none;margin-left:auto;margin-right:auto">
+        <tr>
+            <td> <img class='img-fluid' style="width:83px;height:125px" src="../static/images/toucan.jpg" alt='Toucan' /></td>
+    
+    
+            <td> <img class='img-fluid' style="width:83px;height:125px" src="../static/images/bluejay_portrait.jpg" alt='bluejay_portrait' /></td>
+    
+            <td> <img class='img-fluid' style="width:100px;height:125px" src="../static/images/oriole_portrait.jpg" alt='oriole' /></td>
+    
+            <td> <img class='img-fluid' style="width:94px;height:125px" src="../static/images/turqoise_bird.jpg" alt='Turquois Bird' /></td>
+    
+            <td> <img class='img-fluid' style="width:94px;height:125px" src="../static/images/cardinal_portrait.jpg" alt='Cardinal' /></td>
+    
+            <td> <img class='img-fluid' style="width:93px;height:125px" src="../static/images/pigeon.jpg" alt='Pigeon' /></td>
+    
+            <td> <img class='img-fluid' style="width:93px;height:125px" src="../static/images/goldfinch.jpg" alt='Goldfinch' /></td>
+    
+            <td> <img class='img-fluid' style="width:94px;height:125px" src="../static/images/long_tail_slateblue.jpg" alt='Long Tail Slateblue Bird' /></td>
+    
+            <td> <img class='img-fluid' style="width:94px;height:125px" src="../static/images/owl.jpg" alt='Owl' /></td>
+            
+            <td> <img class='img-fluid' style="width:94px;height:125px" src="../static/images/parrot.jpg" alt='Parrot' /></td>
+    
+            <td> <img class='img-fluid' style="width:94px;height:125px" src="../static/images/blue_yelllow_winter.jpg" alt='Blue and Yellow Fuzzy Bird' /></td>
+        </tr>
+    </table>
+    
     
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
