@@ -13,57 +13,55 @@
        
     </head>
 
-    <body style="background-color: white">
+    <body style="background-color: lightgray">
     
     {% block header %}
     {% endblock header %}
   
-    <nav class="navbar navbar-expand-lg" style="background-color: #088256">
-        <a class="navbar-brand" style="color:white" href="{{ url_for('home') }}">Bird <span style="font-size:9px;color:white"> on the</span> Brain  |  </a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('home') }}">Bird <span style="font-size:9px"> on the</span> Brain  |  </a>
 
-        <button style="background-color:#0c573b;color:black" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false"  aria-label="Toggle navigation">
-
-            <span style="color:black"  class="navbar-toggler-icon">☰</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-
+        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     {# url_for('route function name') creates a link to that route #}
-                    <a style="color:white" class="nav-link" href="{{ url_for('home') }}">Home &nbsp;&#8226;</a>
+                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{url_for('api.postSighting') }}">Add Sighting &nbsp;&#8226;</a>
+                    <a class="nav-link" href="{{url_for('api.postSighting') }}">Add Sighting</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{url_for('api.getAnnualList') }}">Annual & Lifetime Lists &nbsp;&#8226;</a>
+                    <a class="nav-link" href="{{url_for('api.getAnnualList') }}">Annual & Lifetime Lists</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{url_for('api.internalSearch') }}">Bird Brain Search &nbsp;&#8226;</a>
+                    <a class="nav-link" href="{{url_for('api.internalSearch') }}">Bird Brain Search</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{url_for('api.eBirdSearchFunction') }}">eBird Search</a>
+                    <a class="nav-link" href="{{url_for('api.eBirdSearchFunction') }}">eBird Search</a>
                 </li>
             </ul>
 
             <ul class="navbar-nav ml-auto">
                 {% if current_user.is_authenticated %}
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{ url_for('auth.logout') }}">Sign Out</a>
+                    <a class="nav-link" href="{{ url_for('auth.logout') }}">Sign Out</a>
                 </li>
                 {% else %}
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{ url_for('auth.login') }}">Sign In</a>
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">Sign In</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+                    <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
                 </li>
                 {% endif %}
             </ul>
         </div>
     </nav>
-
 
     <table style="margin-top:10px;border:none;margin-left:auto;margin-right:auto">
         <tr>

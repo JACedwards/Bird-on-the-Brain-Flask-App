@@ -127,20 +127,26 @@ def internalSearch():
                 
                 which_list = k
                 which_list_value = v
-        
+
+
+        search_results=''
         if which_list == 'state':
             search_results = Bird.query.filter_by(state=which_list_value.title()).all()
-            # print('this is search results', search_results)
         elif which_list == 'common_name':
             search_results = Bird.query.filter_by(common_name=which_list_value.title()).all()
-            # print('this is search results', search_results)
         elif which_list == 'date_year':
-            print(which_list_value)
             search_results = Bird.query.filter_by(date_year=which_list_value).all()
-            # print('this is search results', search_results)
         elif which_list == 'county':
             search_results = Bird.query.filter_by(county=which_list_value.title()).all()
-            # print('this is search results', search_results)
+
+        if which_list == 'common_name':
+            which_list = 'Bird'
+        elif which_list == 'date_year':
+            which_list = 'Year'
+        elif which_list == 'county':
+            which_list = 'County'
+        elif which_list == 'state':
+            which_list = 'State'
 
         return render_template('list_search_results.html', form = search_results, key=which_list, value=which_list_value) 
         # flash(f'{bird.common_name} has been added to your list.', category = 'success')        

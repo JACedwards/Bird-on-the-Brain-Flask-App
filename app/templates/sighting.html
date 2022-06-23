@@ -7,13 +7,18 @@
 
 {% block content %}
 
+<br>
+<h3 style="color:#088256;text-align:center">Add a Bird Sighting to Your Lists</h3>
+
+<hr style="border: 5px solid #088256;margin-bottom: -10px;padding-bottom:-10px">
+
 <form class="p-5" method="POST">
     {{  form.hidden_tag() }}
-    <div class="col-8">
+    <div class="col-4">
         <div class="form-group">
             <fieldset>
                 {{ form.common_name.label }}
-                {{ form.common_name(class='form-control', placeholder='Be as specific as you can. . .') }}
+                {{ form.common_name(class='form-control') }}
             </fieldset>
         </div>
         <div class="form-group">
@@ -26,19 +31,19 @@
         <div class="form-group">
             <fieldset>
                 {{ form.date_year.label }}
-                {{ form.date_year(class='form-control', placeholder='Year sighted. . .') }}
+                {{ form.date_year(class='form-control') }}
             </fieldset>
         </div>
         <div class="form-group">
             <fieldset>
                 {{ form.date_month.label }}
-                {{ form.date_month(class='form-control', placeholder='(Use two digits, such as 2nd = 02)') }}
+                {{ form.date_month(class='form-control', placeholder='2 digits (Example: 2nd = 02)') }}
             </fieldset>
         </div>
         <div class="form-group">
             <fieldset>
                 {{ form.date_day.label }}
-                {{ form.date_day(class='form-control', placeholder='(Use two digits, such as January = 02)') }}
+                {{ form.date_day(class='form-control', placeholder='2 digits (Example: January = 01)') }}
             </fieldset>
         </div>
 
@@ -46,25 +51,29 @@
         <div class="form-group">
             <fieldset>
                 {{ form.county.label }}
-                {{ form.county(class='form-control', placeholder='County where bird was sighted. . .') }}
+                {{ form.county(class='form-control') }}
             </fieldset>
         </div>
         <div class="form-group">
             <fieldset>
                 {{ form.state.label }}
-                {{ form.state(class='form-control', placeholder='State in which bird was sighted. . .') }}
+                {{ form.state(class='form-control') }}
             </fieldset>
         </div>
+        
+        
         <div class="form-group">
             <fieldset>
                 {{ form.comments.label }}
-                {{ form.comments(class='form-control', placeholder='(Optional)') }}
+                {{ form.comments(class='form-control', rows='4', type='textarea', placeholder='(Optional)') }}
             </fieldset>
         </div>
+
+        
         <div class="form-group">
             <fieldset>
                 {{ form.image.label }}
-                {{ form.image(class='form-control', disabled='true', placeholder='(Optional)') }}
+                {{ form.image(class='form-control', disabled='true', placeholder='(Planned future functionality)') }}
             </fieldset>
         </div>
         {{ form.submit(class='btn btn-primary', style='background-color:#088256;border-radius:10px;width:100%')}}

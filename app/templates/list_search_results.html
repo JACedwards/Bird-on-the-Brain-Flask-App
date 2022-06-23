@@ -7,9 +7,14 @@
 
 {% block content %}
 
-<h3>{{value}} List</h3>
+<br>
+<h3 style="color:#088256;text-align:center">Results for Search by {{key}}</h3>
 
-<table class="table">
+<hr style="border: 5px solid #088256;">
+
+<h3 style="padding-left:20px;margin-left:20px">{{value}} List</h3>
+
+<table class="table table-striped" style="padding-left:30px;margin-left:30px">
 
     <thead>
       <tr>
@@ -17,6 +22,8 @@
         <th scope="col">County</th>
         <th scope="col">State</th>
         <th scope="col">Year</th>
+        <th scope="col">Comments</th>
+
       </tr>
     </thead>
     <tbody>
@@ -24,7 +31,7 @@
       
       {% for x in form %}
             <tr>
-                <th scope="row">
+                <th>
                     {{ x.common_name}}
                 </th>
                 <td>
@@ -35,6 +42,9 @@
                 <td>
                     {{ x.date_year}}
                 </td>
+                <td>
+                  {{ x.comments}}
+              </td>
             </tr>
       {% endfor %}
 

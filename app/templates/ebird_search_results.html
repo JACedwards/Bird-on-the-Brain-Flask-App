@@ -6,38 +6,46 @@
 {% endblock header %}
 
 {% block content %}
-<h4 style="padding-left:15px;padding-top:20px;padding-bottom:0px;margin-bottom:0px">eBird Observations for {{form_county}} County, Indiana, for the past {{form_days}} days</h4>
+<br>
+<h3 style="color:#088256;text-align:center">eBird Observation Results</h3>
+
+<hr style="border: 5px solid #088256;">
+
+
+<h4 style="padding-left:30px;margin-left:30;padding-top:20px;padding-bottom:0px;margin-bottom:0px">{{form_county}} County, Indiana, for the past {{form_days}} days</h4>
 <br style="padding-top:0px;margin-top:0px">
-<table class="table">
+<div style="padding-left:30px;margin-left:30">
+    <table class="table table-striped" >
 
-    <thead>
-      <tr>
-        <th scope="col">Bird Name</th>
-        <th scope="col">Scientific Name</th>
-        <th scope="col">Location*</th>
-        <th scope="col">Date</th>
-      </tr>
-    </thead>
-    <tbody>
+        <thead>
+          <tr>
+            <th scope="col">Bird Name</th>
+            <th scope="col">Scientific Name</th>
+            <th scope="col">Location*</th>
+            <th scope="col">Date/Time</th>
+          </tr>
+        </thead>
+        <tbody>
 
-      {% for x in form %}
-        <tr>
-          <th scope="row" style="font-weight:normal">
-              {{ x.comName}}
-          </th>
-          <td>
-              {{ x.sciName}}
-          <td>
-              {{ x.locName}}
-          </td>
-          <td>
-              {{ x.obsDt}}
-          </td>
-        </tr>
-      {% endfor %}
+          {% for x in form %}
+            <tr>
+              <th scope="row" style="font-weight:normal">
+                  {{ x.comName}}
+              </th>
+              <td>
+                  {{ x.sciName}}
+              <td>
+                  {{ x.locName}}
+              </td>
+              <td>
+                  {{ x.obsDt}}
+              </td>
+            </tr>
+          {% endfor %}
 
-    </tbody>
-  </table> 
+        </tbody>
+      </table>
+    </div>   
   <hr>
   <p style="padding-left:15px"><small>*These data are crowd-sourced by Cornell University, and there appears to be no standard template for location reporting, which may include identifiers, such as city, landmark, park, zipcode. and/or GPS coordinates</small></p>
 

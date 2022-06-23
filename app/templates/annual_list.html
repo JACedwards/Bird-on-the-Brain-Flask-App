@@ -7,11 +7,17 @@
 
 {% block content %}
 
+<br>
+<h3 style="color:#088256;text-align:center">Check Your Annual or Lifetime Lists</h3>
+
+<hr style="border: 5px solid #088256;margin-bottom: -10px;padding-bottom:-10px">
+
 <form class="p-5" method="POST">
     {{  form.hidden_tag() }}
     <div class="col-8">
         <div class="form-check">
             <fieldset>
+                <br>
                 {{ form.annual(class='form-check-input', type='radio') }}
                 {{ form.annual.label }}
             </fieldset>

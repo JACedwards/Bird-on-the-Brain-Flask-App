@@ -6,8 +6,8 @@
 {% block content%}
 <form class="3" method="POST">
 {{form.hidden_tag()}}
-
-<div class="form-group" style="margin-top:20px; font-weight:bold">
+<body style="color:#088256">
+<div class="form-group" style="margin-top:20px; font-weight:bold;color:#088256">
             <fieldset>
             {{ form.username.label }}
             {{ form.username(class='form-control', placeholder='Username. . .')}}
@@ -48,5 +48,6 @@
     </div>
 
 </form>
+</body>
 
 {% endblock content%}
