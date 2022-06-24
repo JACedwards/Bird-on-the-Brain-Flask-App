@@ -24,9 +24,17 @@ def postSighting():
         sighting['user_id']=id
         bird = Bird(sighting)
         # **object comprised of form input with addition of user_id
- 
+    
         list_bird_dicts = []
         search_input=Bird.query.filter_by(common_name=bird.common_name).all()
+        print(search_input)
+
+        if search_input == []:
+            bird.__dict__['annual']='annual'
+            bird.__dict__['lifetime']='lifetime'
+            db.session.add(bird)
+            db.session.commit()
+
 
         # **probably need error handling here if query returns empty list?
         a=''
@@ -39,22 +47,22 @@ def postSighting():
                 a = 'annual'
                 # **no change to bird (object)
             else:
-                a = None
+                a = 'missing'
 
-        
-        if a == None:
+        if a == 'missing':
             bird.__dict__['annual']='annual'
             # input_annual = bird.__dict__
             # input_annual['annual']='annual'
 
+        b=''
         # Lifetime Check Starts
         for y in list_bird_dicts:
             if y['lifetime'] == 'lifetime':
-                a = 'lifetime'
+                b = 'lifetime'
             else:
-                a = None
+                b = None
 
-        if a == None:
+        if b == None:
             bird.__dict__['lifetime']='lifetime'
 
        
