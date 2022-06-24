@@ -179,22 +179,22 @@ def eBirdSearchFunction():
     if request.method == 'POST':
                 
         eb_search=ebform.data
-        # print(eb_search)  **[this prints dictionary of input]
-        # print(eb_search.county, eb_search.days)
-
         eb_search_input=EBirdSearch(eb_search)
-        # print(eb_search_input)
-        print(eb_search_input.county, eb_search_input.days)
-
         search_results = getCountyByDate(eb_search_input.county, eb_search_input.days)
-
-        # ***restore next 3 lines to get to work with county code number as input from form***
-        # search_results = get_observations('bdhdkslf0ktt', f'US-IN-{eb_search_input.county}', back=eb_search_input.days)
-        # print(search_results)
-
         return render_template('ebird_search_results.html', form = search_results, form_county=eb_search_input.county, form_days=eb_search_input.days) 
 
     return render_template('ebird_search.html', form=ebform)
+
+
+
+
+
+
+
+
+
+
+
 
 
 @api.route('/evil_cat', methods=['GET'])
