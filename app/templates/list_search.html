@@ -12,57 +12,49 @@
 
 <hr style="border: 5px solid #088256;">
 
-<table style="margin-left: auto; margin-right: auto">
-    <tr>
-        <td>
-
-
-
-<form class="p-5" method="POST">
-    {{  form.hidden_tag() }}
-    <div class="col-4">
-        
-    
-    
-    <div class="form-group" style="border:2px solid #088256; padding:10px">
-            <fieldset>
-                {{ form.common_name.label }}
-                {{ form.common_name(class='form-control', placeholder='Bird Name') }}
-            </fieldset>
+<div class="row justify-content-center">
+    <div class="col-3">
+        <div style = "text-align:center">
+            <h4>Search by One Field at a Time</h4>
         </div>
+        <form method="POST">
+            {{  form.hidden_tag() }}
+            <div class="form-group" style="border:2px solid #088256; padding:10px">
+                <fieldset>
+                    {{ form.common_name.label }}
+                    {{ form.common_name(class='form-control', placeholder='Bird Name') }}
+                </fieldset>
+            </div>
+
+            <div class="form-group" style="border:2px solid #088256; padding:10px">
+                <fieldset>
+                    {{ form.date_year.label }}
+                    {{ form.date_year(class='form-control', placeholder='Year') }}
+                </fieldset>
+            </div>
+
+            <div class="form-group" style="border:2px solid #088256; padding:10px">
+                <fieldset>
+                    {{ form.county.label }}
+                    {{ form.county(class='form-control', placeholder='County') }}
+                </fieldset>
+            </div>
+
+
+            <div class="form-group" style="border:2px solid #088256; padding:10px">
+                <fieldset>
+                    {{ form.state.label }}
+                    {{ form.state(class='form-control', placeholder='State') }}
+                </fieldset>
+            </div>
+            {{ form.submit(class='btn btn-primary', style='background-color:#088256;border-radius:10px;width:100%')}}
+        </form>
     </div>  
 
-        <div class="form-group" style="border:2px solid #088256; padding:10px">
-            <fieldset>
-                {{ form.date_year.label }}
-                {{ form.date_year(class='form-control', placeholder='Year') }}
-            </fieldset>
-        </div>
-    </div>  
 
-        <div class="form-group" style="border:2px solid #088256; padding:10px">
-            <fieldset>
-                {{ form.county.label }}
-                {{ form.county(class='form-control', placeholder='County') }}
-            </fieldset>
-        </div>
-    </div>  
-
-        <div class="form-group" style="border:2px solid #088256; padding:10px">
-            <fieldset>
-                {{ form.state.label }}
-                {{ form.state(class='form-control', placeholder='State') }}
-            </fieldset>
-        </div>
-        {{ form.submit(class='btn btn-primary', style='background-color:#088256;border-radius:10px;width:100%')}}
-    </div>  
-</form>
-        </td>
-        <td>
-
-            <img class='img-fluid' style="width:333px;height:500px" src="../static/images/parrot_red.jpg" alt='oriole' />
-
-        </td>
-    </tr>
+    <div class="col-3">
+            <img class='img-fluid' style="width:333px;height:500px;padding-top:39px" src="../static/images/parrot_red.jpg" alt='oriole' />
+    </div>
+</div>
 
   {% endblock content %}

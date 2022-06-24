@@ -29,7 +29,7 @@ def postSighting():
         search_input=Bird.query.filter_by(common_name=bird.common_name).all()
 
         # **probably need error handling here if query returns empty list?
-        
+        a=''
         for x in search_input:
             bird_dict = x.__dict__
             list_bird_dicts.append(bird_dict)

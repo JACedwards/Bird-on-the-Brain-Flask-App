@@ -8,7 +8,7 @@
 {% block content %}
 
 <br>
-<h3 style="color:#088256;text-align:center">Add a Bird Sighting to Your Lists</h3>
+<h3 style="color:#088256;text-align:center">Add a Bird to Your Lists</h3>
 
 <hr style="border: 5px solid #088256;margin-bottom: -10px;padding-bottom:-10px">
 
@@ -40,13 +40,13 @@
                 <div class="form-group">
                     <fieldset>
                         {{ form.date_month.label }}
-                        {{ form.date_month(class='form-control', placeholder='2 digits (Example: 2nd = 02)') }}
+                        {{ form.date_month(class='form-control', placeholder='(Optional [2 digits])') }}
                     </fieldset>
                 </div>
                 <div class="form-group">
                     <fieldset>
                         {{ form.date_day.label }}
-                        {{ form.date_day(class='form-control', placeholder='2 digits (Example: January = 01)') }}
+                        {{ form.date_day(class='form-control', placeholder='(Optional [2 digits])') }}
                     </fieldset>
                 </div>
 
@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <fieldset>
                         {{ form.county.label }}
-                        {{ form.county(class='form-control') }}
+                        {{ form.county(class='form-control', placeholder='(Optional)') }}
                     </fieldset>
                 </div>
                 <div class="form-group">
