@@ -1,14 +1,10 @@
+Added fucntionality:  (Promised on resume)
+1. Update/edit sighting
+2. Delete sighting
+3. search by username
+4. search ebird by hotspots
+6. Outing list
 
-
-'2'To make interactive API calls, start following along with Friday Morning (of week 5) video title "Forms-AM (Flask) minute 15:28 to apply to this app.  At that point starting to talk about a form that would allow user to request data from an API.
-
-'3' Later: should be able to use sam's  F1Driver page  (or my Pokemon autogenerate api output) as model for (although those routes are passive):
-    a Ebird api
-    b endangered species api 
-
-
-'4' Might want to create a data base model env? Before going too much further.
-
-See first non-flask version of tihs project for functionality ideas:  Additional might be
-'1' Lists of birding clubs
-'2' Lists of birding events
+Beyond resume promises:
+1. Blog
+5. pictures uploaded with sightings

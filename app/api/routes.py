@@ -120,13 +120,12 @@ def getAnnualList():
 
 
 
-
+# ***does not throw error if user puts in bird, year, country or state that is not in database***
 
 @api.route('/list_search', methods=['GET', 'POST'])
 def internalSearch():
     # return 'This is the list search page'
     lsform = ListSearchForm()
-    # *******Right now this is only set up to search Bird Sighting database by state coloumn*********
     if request.method == 'POST':
         
         ls_search=lsform.data
@@ -160,6 +159,7 @@ def internalSearch():
         return render_template('list_search_results.html', form = search_results, key=which_list, value=which_list_value) 
         # flash(f'{bird.common_name} has been added to your list.', category = 'success')        
         # return redirect(url_for('api.postSighting'))
+   
     else:
         # return render_template('list_search', form=lssearch)
         return render_template('list_search.html', form=lsform)
