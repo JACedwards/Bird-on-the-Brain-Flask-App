@@ -14,15 +14,50 @@ def token_required(api_route):
         return api_route(*args, **kwargs)
     return decorator_function
 
-def getCountyByDate(county_name, days):
+
+def getCountyByDate(state_name, county_name, days):
 
     """Call to API returning Bird observations for specified county ('county_name') and number of days from present backwards ('days')"""
 
-    county_code = get_regions('bdhdkslf0ktt', 'subnational2', 'US-IN')
+    state_code = get_regions('bdhdkslf0ktt', 'subnational1', 'US')
+    print(state_code)
+    # above = dictionary of state codes
+
+    for y in state_code:
+        if y['name'] == state_name:
+            country_state = y['code']
+            # above = "US-NY" if New york put into form
+            print(country_state)
+    
+    county_code = get_regions('bdhdkslf0ktt', 'subnational2', f'{country_state}')
+    print(county_code)
+    # dictionary of county codes
 
     for x in county_code:
         if x['name'] == county_name:
             country_state_county = x['code']
 
     records = get_observations('bdhdkslf0ktt', f'{country_state_county}', back=f"{days}")
+    print(records)
     return records
+
+# getCountyByDate('New York','Albany', 3)
+
+
+# working before tried to add state search
+
+# def getCountyByDate(county_name, days):
+
+#     """Call to API returning Bird observations for specified county ('county_name') and number of days from present backwards ('days')"""
+
+#     county_code = get_regions('bdhdkslf0ktt', 'subnational2', 'US-IN')
+#     print(county_code)
+
+#     for x in county_code:
+#         if x['name'] == county_name:
+#             country_state_county = x['code']
+
+#     records = get_observations('bdhdkslf0ktt', f'{country_state_county}', back=f"{days}")
+#     return records
+
+

@@ -7,7 +7,7 @@
 
 {% block content %}
 <br>
-<h3 style="color:#088256;text-align:center">Search eBird Sightings for Indiana Counties</h3>
+<h3 style="color:#088256;text-align:center">Search eBird Sightings by State and County</h3>
 <h4 style="color:#088256;text-align:center">Most Recent 1-30 Days</h4>
 
 <hr style="border: 5px solid #088256;">
@@ -32,12 +32,16 @@
 
         <div class="form-group">
             <fieldset>
+                {{ form.state.label }}
+                {{ form.state (class='form-control',  textarea='400px') }}
+            </fieldset>
+            <fieldset>
                 {{ form.county.label }}
-                {{ form.county(class='form-control',  textarea='400px',placeholder='Indiana County') }}
+                {{ form.county(class='form-control',  textarea='400px') }}
             </fieldset>
             <fieldset>
                 {{ form.days.label }}
-                {{ form.days(class='form-control', textarea='400px',placeholder='0-30') }}
+                {{ form.days(class='form-control', textarea='400px',placeholder='1-30') }}
             </fieldset>
 
             {{ form.submit(class='btn btn-primary mt-5', style='background-color:#088256;border-radius:10px;width:100%')}}

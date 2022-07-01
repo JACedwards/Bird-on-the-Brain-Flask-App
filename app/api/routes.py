@@ -185,11 +185,16 @@ def eBirdSearchFunction():
     ebform = EbirdSearchForm()
 
     if request.method == 'POST':
-                
-        eb_search=ebform.data
-        eb_search_input=EBirdSearch(eb_search)
-        search_results = getCountyByDate(eb_search_input.county, eb_search_input.days)
-        return render_template('ebird_search_results.html', form = search_results, form_county=eb_search_input.county, form_days=eb_search_input.days) 
+
+        try:        
+            eb_search=ebform.data
+            eb_search_input=EBirdSearch(eb_search)
+            search_results = getCountyByDate(eb_search_input.state.title(), eb_search_input.county.title(), eb_search_input.days)
+            return render_template('ebird_search_results.html', form = search_results, form_state=eb_search_input.state, form_county=eb_search_input.county, form_days=eb_search_input.days)
+        except:
+            flash('Records not found.  Please check state & county spelling, and be sure to enter 1-30 for days.', category='danger')
+            return redirect(url_for('api.eBirdSearchFunction'))
+            
 
     return render_template('ebird_search.html', form=ebform)
 
