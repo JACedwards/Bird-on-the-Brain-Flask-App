@@ -142,23 +142,30 @@ def internalSearch():
             search_results = Bird.query.filter_by(state=which_list_value.title()).all()
         elif which_list == 'common_name':
             search_results = Bird.query.filter_by(common_name=which_list_value.title()).all()
+            print(search_results)
         elif which_list == 'date_year':
             search_results = Bird.query.filter_by(date_year=which_list_value).all()
         elif which_list == 'county':
             search_results = Bird.query.filter_by(county=which_list_value.title()).all()
 
-        if which_list == 'common_name':
-            which_list = 'Bird'
-        elif which_list == 'date_year':
-            which_list = 'Year'
-        elif which_list == 'county':
-            which_list = 'County'
-        elif which_list == 'state':
-            which_list = 'State'
+        if search_results == []:
+            flash('Records not found.  Please be sure to check spelling, use XXXX format for year, and/or use only one field per search.', category='danger')
+            return redirect(url_for('api.internalSearch'))
 
-        return render_template('list_search_results.html', form = search_results, key=which_list, value=which_list_value) 
-        # flash(f'{bird.common_name} has been added to your list.', category = 'success')        
-        # return redirect(url_for('api.postSighting'))
+        else:
+
+            if which_list == 'common_name':
+                which_list = 'Bird'
+            elif which_list == 'date_year':
+                which_list = 'Year'
+            elif which_list == 'county':
+                which_list = 'County'
+            elif which_list == 'state':
+                which_list = 'State'
+
+            return render_template('list_search_results.html', form = search_results, key=which_list, value=which_list_value) 
+            # flash(f'{bird.common_name} has been added to your list.', category = 'success')        
+            # return redirect(url_for('api.postSighting'))
    
     else:
         # return render_template('list_search', form=lssearch)
