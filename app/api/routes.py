@@ -149,7 +149,7 @@ def internalSearch():
             search_results = Bird.query.filter_by(county=which_list_value.title()).all()
 
         if search_results == []:
-            flash('Records not found.  Please be sure to check spelling, use XXXX format for year, and/or use only one field per search.', category='danger')
+            flash('No records found.  Please be sure to check spelling, use XXXX format for year, and/or use only one field per search.', category='danger')
             return redirect(url_for('api.internalSearch'))
 
         else:
