@@ -1,10 +1,17 @@
 Added fucntionality:  (Promised on resume)
-1. Update/edit sighting
+1. Outing list
+2. search ebird by hotspots2. Search ebird by common name:  see dictionary below (should be fairly easy)
+3. protect routes that need to be signed in to use
+3. search by username:  try to create a dropdown of user names
 2. Delete sighting
-3. search by username
-4. search ebird by hotspots
-6. Outing list
+
+
 
 Beyond resume promises:
 1. Blog
 5. pictures uploaded with sightings
+1. Update/edit sighting:  no longer on resume
+
+ebird sample dictionary for comName (bird by name) search:
+
+[{'speciesCode': 'comyel', 'comName': 'Common Yellowthroat', 'sciName': 'Geothlypis trichas', 'locId': 'L19936753', 'locName': '215 West Superior Street, Kokomo, Indiana, US (40.484, -86.133)', 'obsDt': '2022-07-02 11:00', 'lat': 40.4844198, 'lng': -86.1332695, 'obsValid': True, 'obsReviewed': False, 'locationPrivate': True, 'subId': 'S114230004'}, {'speciesCode': 'sonspa', 'comName': 'Song Sparrow', 'sciName': 'Melospiza melodia', 'locId': 'L19936753', 'locName': '215 West Superior Street, Kokomo, Indiana, US (40.484, -86.133)', 'obsDt': '2022-07-02 11:00', 'lat': 40.4844198, 'lng': -86.1332695, 'obsValid': True, 'obsReviewed': False, 'locationPrivate': True, 'subId': 'S114230004'}, {'speciesCode': 'grbher3', 'comName': 'Great Blue Heron', 'sciName': 'Ardea herodias', 'locId': 'L19925625', 'locName': '6532–6998 E 500 S, Kokomo US-IN 40.40597, -86.00146', 'obsDt': '2022-07-02 10:52', 'howMany': 1, 'lat': 40.405966, 'lng': -86.001459, 'obsValid': True, 'obsReviewed': False, 'locationPrivate': True, 'subId': 'S114271434'}, {'speciesCode': 'houfin', 'comName': 'House Finch', 'sciName': 'Haemorhous mexicanus', 'locId': 'L19690737', 'locName': '4414–4998 S 700 E, Kokomo US-IN 40.40615, -85.99456', 'obsDt': '2022-07-01 18:20', 'howM
