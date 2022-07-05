@@ -55,11 +55,11 @@
 
             <ul class="navbar-nav ml-auto">
                 {% if current_user.is_authenticated %}
-                <li class="nav-item active">
+                <li class="nav-item active ml-auto">
                     <a style="color:white" class="nav-link" href="{{ url_for('auth.logout') }}">Sign Out</a>
                 </li>
                 {% else %}
-                <li class="nav-item active">
+                <li class="nav-item active ml-auto">
                     <a style="color:white" class="nav-link" href="{{ url_for('auth.login') }}">Sign In &nbsp;&nbsp;&#8226;</a>
                 </li>
                 <li class="nav-item active">
@@ -76,26 +76,16 @@
 
     <table style="margin-top:10px;border:none;margin-left:auto;margin-right:auto">
         <tr>
-            <td> <img class='img-fluid' style="width:83px;height:125px;min-width:83px" src="../static/images/toucan.jpg" alt='Toucan' /></td>
-    
-            <td> <img class='img-fluid' style="width:83px;height:125px;min-width:83px" src="../static/images/bluejay_portrait.jpg" alt='bluejay_portrait' /></td>
-    
-            <td> <img class='img-fluid' style="width:100px;height:125px;min-width:100px" src="../static/images/oriole_portrait.jpg" alt='oriole' /></td>
-    
-            <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/turqoise_bird.jpg" alt='Turquois Bird' /></td>
-    
-            <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/cardinal_portrait.jpg" alt='Cardinal' /></td>
-    
-            <td> <img class='img-fluid' style="width:93px;height:125px;min-width:93px" src="../static/images/pigeon.jpg" alt='Pigeon' /></td>
-    
-            <td> <img class='img-fluid' style="width:93px;height:125px;min-width:93px" src="../static/images/goldfinch.jpg" alt='Goldfinch' /></td>
-    
-            <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/long_tail_slateblue.jpg" alt='Long Tail Slateblue Bird' /></td>
-    
-            <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/owl.jpg" alt='Owl' /></td>
-            
-            <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/parrot.jpg" alt='Parrot' /></td>
-    
+            <td> <img class='img-fluid' style="width:83px;height:125px;min-width:83px" src="../static/images/parrot_red_c.jpg" alt='Red Parrot' /></td>
+            <td> <img class='img-fluid' style="width:83px;height:125px;min-width:83px" src="../static/images/bluejay_portrait.jpg" alt='bluejay_portrait_c' /></td>  
+            <td> <img class='img-fluid' style="width:100px;height:125px;min-width:100px" src="../static/images/oriole_portrait.jpg" alt='oriole' /></td>  
+            <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/turqoise_bird.jpg" alt='Turquois Bird' /></td>  
+            <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/cardinal_portrait.jpg" alt='Cardinal' /></td>  
+            <td> <img class='img-fluid' style="width:93px;height:125px;min-width:93px" src="../static/images/pigeon.jpg" alt='Pigeon' /></td>  
+            <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/goldfinch2.jpg" alt='Goldfinch' /></td>  
+            <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/long_tail_slateblue.jpg" alt='Long Tail Slateblue Bird' /></td>  
+            <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/owl.jpg" alt='Owl' /></td>          
+            <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/parrot.jpg" alt='Parrot' /></td>  
             <td> <img class='img-fluid' style="width:94px;height:125px;min-width:94px" src="../static/images/blue_yelllow_winter.jpg" alt='Blue and Yellow Fuzzy Bird' /></td>
         </tr>
         
