@@ -15,6 +15,7 @@ def login():
     if request.method == 'POST':
         if lform.validate_on_submit():
             user = User.query.filter_by(username=lform.username.data).first()
+            print(user)
             if user and check_password_hash(user.password, lform.password.data):
                 login_user(user)
                 print('current user:', current_user.__dict__)
@@ -40,7 +41,7 @@ def register():
                 db.session.add(newuser)
                 db.session.commit()
             except:
-                flash('Username of email already taken.  Please try a different ones.', category='danger')
+                flash('Username or email already taken.  Please try a different ones.', category='danger')
                 return redirect(url_for('auth.register'))
 
             login_user(newuser)

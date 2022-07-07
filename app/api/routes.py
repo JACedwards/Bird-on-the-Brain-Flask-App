@@ -16,7 +16,7 @@ import random
 
 # leaving out validate on submit for now
 @api.route('/sighting', methods=['GET', 'POST'])
-@token_required
+# @token_required
 def postSighting():
     bform = BirdForm()
     if request.method == 'POST':
@@ -76,7 +76,9 @@ def postSighting():
                 
         return redirect(url_for('api.postSighting'))
     else:
-        return render_template('sighting.html', form=bform)
+        print(current_user, current_user.api_token)
+        header = {'birds-access-token': current_user.api_token}
+        return render_template('sighting.html', form=bform, headers = header)
 
 
 
@@ -84,7 +86,7 @@ def postSighting():
 
 
 @api.route('/annual_list', methods=['GET', 'POST'])
-@token_required
+# @token_required
 def getAnnualList():
     
     
@@ -125,7 +127,7 @@ def getAnnualList():
 # ***does not throw error if user puts in bird, year, country or state that is not in database***
 
 @api.route('/list_search', methods=['GET', 'POST'])
-@token_required
+# @token_required
 def internalSearch():
     # return 'This is the list search page'
     lsform = ListSearchForm()
@@ -190,7 +192,6 @@ def internalSearch():
 
 
 @api.route('/ebird_search', methods=['GET', 'POST'])
-@token_required
 def eBirdSearchFunction():
     
     ebform = EbirdSearchForm()
@@ -212,7 +213,6 @@ def eBirdSearchFunction():
 
 
 @api.route('/evil_cat', methods=['GET'])
-@token_required
 def fetchEvilCatFact():
     
     data =''
@@ -233,6 +233,64 @@ def fetchEvilCatFact():
     # https://catfact.ninja/fact 
     # https://api.thecatapi.com/v1/images/search
 
+
+
+
+
+
+ #Searching Data of Other Users   
+
+# <><><>In process of adapting this list search route to an other user search route<><>
+
+# @api.route('/other-user-search', methods=['GET', 'POST'])
+# # @token_required
+# def otherUserSearch():
+    # return 'This is the list search page'
+    # lsform = ListSearchForm()
+    # if request.method == 'POST':
+        
+    #     ls_search=lsform.data
+    #     print(ls_search)
+    #     for k, v in ls_search.items():
+    #         if v != None and k != 'csrf_token' and v !='' and v != True:
+                
+    #             which_list = k
+    #             which_list_value = v
+
+
+    #     search_results=''
+    #     if which_list == 'state':
+    #         search_results = Bird.query.filter_by(state=which_list_value.title()).all()
+    #     elif which_list == 'common_name':
+    #         search_results = Bird.query.filter_by(common_name=which_list_value.title()).all()
+    #         print(search_results)
+    #     elif which_list == 'date_year':
+    #         search_results = Bird.query.filter_by(date_year=which_list_value).all()
+    #     elif which_list == 'county':
+    #         search_results = Bird.query.filter_by(county=which_list_value.title()).all()
+
+    #     if search_results == []:
+    #         flash('No records found.  Please be sure to check spelling, use XXXX format for year, and/or use only one field per search.', category='danger')
+    #         return redirect(url_for('api.internalSearch'))
+
+    #     else:
+
+    #         if which_list == 'common_name':
+    #             which_list = 'Bird'
+    #         elif which_list == 'date_year':
+    #             which_list = 'Year'
+    #         elif which_list == 'county':
+    #             which_list = 'County'
+    #         elif which_list == 'state':
+    #             which_list = 'State'
+
+    #         return render_template('list_search_results.html', form = search_results, key=which_list, value=which_list_value) 
+    #         # flash(f'{bird.common_name} has been added to your list.', category = 'success')        
+    #         # return redirect(url_for('api.postSighting'))
+   
+    # else:
+    #     # return render_template('list_search', form=lssearch)
+    #     return render_template('list_search.html', form=lsform)
 
 
 

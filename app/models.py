@@ -13,6 +13,7 @@ def load_user(userid):
 from datetime import datetime
 from uuid import uuid4
 from werkzeug.security import generate_password_hash
+from secrets import token_hex
 
 
 
@@ -37,6 +38,7 @@ class User(db.Model, UserMixin):
         self.last_name = last_name.title()
         self.id = str(uuid4())
         self.password = generate_password_hash(password)
+        self.api_token = str(token_hex(16))
 
 class Bird(db.Model):
     # *****See code at bottom to help with this issue?  
