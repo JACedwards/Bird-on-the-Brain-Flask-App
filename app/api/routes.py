@@ -16,6 +16,7 @@ import random
 
 # leaving out validate on submit for now
 @api.route('/sighting', methods=['GET', 'POST'])
+@token_required
 def postSighting():
     bform = BirdForm()
     if request.method == 'POST':
@@ -83,6 +84,7 @@ def postSighting():
 
 
 @api.route('/annual_list', methods=['GET', 'POST'])
+@token_required
 def getAnnualList():
     
     
@@ -123,6 +125,7 @@ def getAnnualList():
 # ***does not throw error if user puts in bird, year, country or state that is not in database***
 
 @api.route('/list_search', methods=['GET', 'POST'])
+@token_required
 def internalSearch():
     # return 'This is the list search page'
     lsform = ListSearchForm()
@@ -187,6 +190,7 @@ def internalSearch():
 
 
 @api.route('/ebird_search', methods=['GET', 'POST'])
+@token_required
 def eBirdSearchFunction():
     
     ebform = EbirdSearchForm()
@@ -207,18 +211,8 @@ def eBirdSearchFunction():
     return render_template('ebird_search.html', form=ebform)
 
 
-
-
-
-
-
-
-
-
-
-
-
 @api.route('/evil_cat', methods=['GET'])
+@token_required
 def fetchEvilCatFact():
     
     data =''
