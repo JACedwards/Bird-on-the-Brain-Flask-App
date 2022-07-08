@@ -32,6 +32,7 @@ class ListSearchForm(FlaskForm):
     annual = StringField('Annual')
     lifetime = StringField('Lifetime')
     outing = StringField('Outing')
+    other_user = StringField('Fellow Bird Brain')
     submit = SubmitField()
 
 class EbirdSearchForm(FlaskForm):

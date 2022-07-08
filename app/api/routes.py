@@ -240,96 +240,18 @@ def fetchEvilCatFact():
 
  #Searching Data of Other Users   
 
-# <><><>In process of adapting this list search route to an other user search route<><>
-
-# @api.route('/other-user-search', methods=['GET', 'POST'])
-# # @token_required
-# def otherUserSearch():
-    # return 'This is the list search page'
-    # lsform = ListSearchForm()
-    # if request.method == 'POST':
-        
-    #     ls_search=lsform.data
-    #     print(ls_search)
-    #     for k, v in ls_search.items():
-    #         if v != None and k != 'csrf_token' and v !='' and v != True:
-                
-    #             which_list = k
-    #             which_list_value = v
-
-
-    #     search_results=''
-    #     if which_list == 'state':
-    #         search_results = Bird.query.filter_by(state=which_list_value.title()).all()
-    #     elif which_list == 'common_name':
-    #         search_results = Bird.query.filter_by(common_name=which_list_value.title()).all()
-    #         print(search_results)
-    #     elif which_list == 'date_year':
-    #         search_results = Bird.query.filter_by(date_year=which_list_value).all()
-    #     elif which_list == 'county':
-    #         search_results = Bird.query.filter_by(county=which_list_value.title()).all()
-
-    #     if search_results == []:
-    #         flash('No records found.  Please be sure to check spelling, use XXXX format for year, and/or use only one field per search.', category='danger')
-    #         return redirect(url_for('api.internalSearch'))
-
-    #     else:
-
-    #         if which_list == 'common_name':
-    #             which_list = 'Bird'
-    #         elif which_list == 'date_year':
-    #             which_list = 'Year'
-    #         elif which_list == 'county':
-    #             which_list = 'County'
-    #         elif which_list == 'state':
-    #             which_list = 'State'
-
-    #         return render_template('list_search_results.html', form = search_results, key=which_list, value=which_list_value) 
-    #         # flash(f'{bird.common_name} has been added to your list.', category = 'success')        
-    #         # return redirect(url_for('api.postSighting'))
-   
-    # else:
-    #     # return render_template('list_search', form=lssearch)
-    #     return render_template('list_search.html', form=lsform)
-
-
-
-
-
-# SCREWED WITH THIS WRAp and got it to work.  The change was so that jason data was a list of dictionaries.
-# @api.route('/birds', methods=['GET'])
-# def getBirds():
-#     # birds = Bird.query.all()
-#     # print(birds)
-#     birds = [bird.to_dict() for bird in Bird.query.all()]
-
-#     return jsonify(birds), 200
-
-# @api.route('/bird/<string:name>', methods=['GET'])
-# def getAnimalName(name):
-#     #dynamic routing
-#     print(name)
-#     bird = Bird.query.filter_by(common_name=name.title()).first()
-#     if bird:
-#         return jsonify(bird.to_dict()), 200
-#     return jsonify({'error':f"{name.title()} is not present in the database"}), 404
-
-# @api.route('/create', methods=['POST'])
+@api.route('/other-user-search', methods=['GET', 'POST'])
 # @token_required
-# def createBird():
-#     try:
-#         newdict = request.get_json()
-#         print(newdict)
-#         a = Bird(newdict)
-#     except:
-#         return jsonify({'error': 'improper body data or request'}), 400
-#     try:
-#         db.session.add(a)
-#         db.session.commit()
-#     except:
-#         return jsonify({'error':'Bird already exists in database'}), 400
+def otherUserSearch():
 
-#     return jsonify({'created':a.to_dict()}), 200
+    #**********<>Need to add POST route here**********************************************************
+
+    return render_template('other-user-search.html')
+
+
+
+# ***Old**
+
 
 # @api.route('/update/<string:id>', methods = ['POST'])
 # @token_required
