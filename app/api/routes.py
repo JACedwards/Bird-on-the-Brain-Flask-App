@@ -76,9 +76,11 @@ def postSighting():
                 
         return redirect(url_for('api.postSighting'))
     else:
-        print(current_user, current_user.api_token)
-        header = {'birds-access-token': current_user.api_token}
-        return render_template('sighting.html', form=bform, headers = header)
+        # #next three lines were my attempt to grab token from user table
+        # print(current_user, current_user.api_token)
+        # header = {'birds-access-token': current_user.api_token}
+        # return render_template('sighting.html', form=bform, headers = header)
+        return render_template('sighting.html', form=bform)
 
 
 
