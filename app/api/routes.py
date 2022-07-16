@@ -235,6 +235,22 @@ def fetchEvilCatFact():
     # https://catfact.ninja/fact 
     # https://api.thecatapi.com/v1/images/search
 
+#Trying to discover route I deleted that is needed by the react app
+#Will Add here if I find it.
+
+# SCREWED WITH THIS  and got it to work.  The change was so that jason data was a list of dictionaries.
+@api.route('/birds', methods=['GET'])
+def getBirds():
+    birds = Bird.query.all()
+    print(birds)
+    birds = {a.bird_id: a.to_dict() for a in birds} 
+    return jsonify(birds), 200
+
+    # birds = [bird.to_dict() for bird in Bird.query.all()]
+    # jsonify(birds.to_dict()), 200
+    # return jsonify(birds), 200
+
+
 
 
 

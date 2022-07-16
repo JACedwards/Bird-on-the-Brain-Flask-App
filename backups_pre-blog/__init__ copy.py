@@ -3,7 +3,6 @@ from flask import Flask
 from config import Config 
 from .auth.routes import auth
 from .api.routes import api
-from .blog.routes import blog
 #database imports
 from .models import db, login
 from flask_migrate import Migrate
@@ -20,7 +19,6 @@ CORS(app, origins='*')
 
 app.register_blueprint(auth)
 app.register_blueprint(api)
-app.register_blueprint(blog)
 
 
 db.init_app(app)

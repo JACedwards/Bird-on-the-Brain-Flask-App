@@ -40,16 +40,6 @@ class User(db.Model, UserMixin):
         self.password = generate_password_hash(password)
         self.api_token = str(token_hex(16))
 
-#Twitter-related Code:  User Post-related model
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(400))
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    user_id = db.Column(db.String(40), db.ForeignKey('user.id'))
-    image = db.Column(db.String(500))
-
-
-
 class Bird(db.Model):
     # *****See code at bottom to help with this issue?  
     # Is ID below the same as User Id or is ti id for bird sighting row? 

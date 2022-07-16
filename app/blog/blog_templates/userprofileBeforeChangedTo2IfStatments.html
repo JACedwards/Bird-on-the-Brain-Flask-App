@@ -1,0 +1,102 @@
+{% extends 'components/layout.html' %}
+
+{% block title %}Tiding Tidings{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+<h3 style="color:#088256;text-align:center">Tidings for Tidings:  Chirp at the Charm<sup><span style="font-size:16px">*</span></sup></h3>
+
+<hr style="border: 5px solid #088256;">
+
+{% if not user %}
+    <div class="row justify-content-center">
+        <div class="col-6 justify-content-center">
+            <h3 style="color:red">404: Sorry! This nest is empty.  Make sure you are signed in.</h3>
+        </div>
+    </div>
+{% else %}
+    {% if user.id == current_user.id %}
+        {% print(user.id) %}
+
+    {% else %}
+        {% print(user.id) %}
+        <div class="row">
+            <div class= "col-8">
+                {% if posts %}
+                    {% for post in posts %}
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            @{{user.username}}
+                        </div>
+                        <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p> {{ post.body}} </p>
+                            <footer class="blockquote-footer"><cite title="Source Title">{{ post.timestamp }}</cite></footer>
+                        </blockquote>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <h3>{{user.username}} has no tidings to tell.</h3>
+                {% endif %}
+
+            </div>
+            <div class= "col-4">
+                <div class="card">
+                    <!-- may want to restore image section later for user profile image -->
+                    <!-- <img src="..." class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                      <h5 class="card-title">{{ user.username }}</h5>
+                      <p class="card-text" style="color:gray">(Favorite Bird)</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">{{ user.first_name}}  {{ user.last_name}}</li>
+                      <li class="list-group-item">Bird Brain Member since <span class="float-right">{{user.date_created }}</span></li>
+                    </ul>
+                    <div class="card-body">
+                      <a href="#" class="card-link" style="color:gray">(Follow Button Placeholder)</a>
+                    </div>
+                  </div>
+
+
+            </div>
+        </div>
+
+            <div class="card">
+                <div class="card-header">
+                Quote
+                </div>
+                <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>A well-known quote, contained in a blockquote element.</p>
+                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                </blockquote>
+                </div>
+            </div>
+
+    {% endif %}
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<hr>
+<div style="margin-left:30px">
+    <p >*A "tiding" is a name for a group of magpies. A "charm" is a name for a group of magpies or finches (<a href="https://safarisafricana.com/collective-nouns-for-birds/" style="font-size:13.5px">Collective Bird Nouns</a>).</p>
+</div>
+
+
+{% endblock content%}
