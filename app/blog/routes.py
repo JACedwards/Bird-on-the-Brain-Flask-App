@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template
 from app.models import db, User, Post
+from .blogforms import PostForm
 
 blog = Blueprint('blog', __name__, template_folder='blog_templates', url_prefix='/blog')
 
-@blog.route('/<string:username>')
+@blog.route('/<string:username>', methods=['GET', 'POST'])
 def userProfile(username):
 
     user = User.query.filter_by(username=username).first()
