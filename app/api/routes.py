@@ -5,7 +5,7 @@ api = Blueprint('api', __name__, url_prefix='/api')
 from app.models import Bird, db, EBirdSearch, EvilCatFact
 from .services import token_required, getCountyByDate
 from .apiforms import BirdForm, ListSearchForm, EbirdSearchForm, AnnualListForm, EvilCatFactForm
-from flask_login import current_user
+from flask_login import current_user, login_required
 from ebird.api import get_region, get_adjacent_regions, get_regions, get_observations
 import requests as r
 import random
@@ -16,7 +16,7 @@ import random
 
 # leaving out validate on submit for now
 @api.route('/sighting', methods=['GET', 'POST'])
-# @token_required
+@login_required
 def postSighting():
     bform = BirdForm()
     if request.method == 'POST':

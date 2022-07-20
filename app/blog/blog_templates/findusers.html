@@ -1,0 +1,45 @@
+{% extends 'components/layout.html' %}
+
+{% block title %}Find Bird Brains{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+<h3 style="color:#088256;text-align:center">Find Other Bird Brains to Follow</h3>
+
+<hr style="border: 5px solid #088256;">
+
+<div class="row justify-content-center"><h4 class="text-center">Members of the Bird on the Brain Murder</h4></div>
+    <hr>
+    <div class="row" style="margin-right:30px;margin-left:30px">
+        {% for user in users %}
+           
+            <div class="card mb-3 mr-3" style="width: 18rem">
+                <!-- may want to restore image section later for user profile image -->
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.username }}</h5>
+                    <p class="card-text" style="color:gray">(Favorite Bird)</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ user.first_name}}  {{ user.last_name}}</li>
+                    <li class="list-group-item">Bird Brain Member Since {{ user.created.strftime('%Y') }}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="{{ url_for('blog.userProfile', username=user.username) }}" class="btn btn-block btn-info" style="background-color:#088256">View Profile</a>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+</div>
+
+
+
+
+
+
+{% endblock content%}
