@@ -198,16 +198,21 @@ def eBirdSearchFunction():
     
     ebform = EbirdSearchForm()
 
-    if request.method == 'POST':
+    if request.method == 'POST': 
 
         try:        
             eb_search=ebform.data
             eb_search_input=EBirdSearch(eb_search)
             search_results = getCountyByDate(eb_search_input.state.title(), eb_search_input.county.title(), eb_search_input.days)
             print(search_results)
-            return render_template('ebird_search_results.html', form = search_results, form_state=eb_search_input.state, form_county=eb_search_input.county, form_days=eb_search_input.days)
+            if search_results == []:
+                flash('No sightings were reported during timeframe requested. Try increasing number of days.', category='danger')
+                return redirect(url_for('api.eBirdSearchFunction')) 
+
+            else:
+                return render_template('ebird_search_results.html', form = search_results, form_state=eb_search_input.state, form_county=eb_search_input.county, form_days=eb_search_input.days)
         except:
-            flash('Records not found.  Please check state & county spelling, and be sure to enter 1-30 for days.', category='danger')
+            flash('Records not found.  Please check state & county spelling, and be sure to enter 1-30 days.', category='danger')
             return redirect(url_for('api.eBirdSearchFunction'))
             
 

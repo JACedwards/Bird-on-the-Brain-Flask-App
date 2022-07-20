@@ -23,17 +23,43 @@
 
     <div class="row">
         <div class= "col-8"> 
+    
             {% if user.id == current_user.id %}
+                <!-- Sam did not have class="3p" below -->
+                <form class="form-inline" method="POST" style="color:#088256;margin-left:30px">
+                    {{form.hidden_tag()}}
+                    <div class="form-group" >
+                        <fieldset id="new_post-field">
+                            <!-- Sam removed next line -->
+                            {{ form.new_post(class='form-control', placeholder='Chirp to the Charm...') }}
+                
+                        </fieldset>
+                        <small id="emailHelp" class="form-text text-muted"></small>
+                    </div>
 
-            {% endif %}
+                    <div style="background-color:#088256;border-radius:10px">
+                        {{form.submit (class='btn btn-info btn-rounded', style='background-color:#088256') }}
+                    </div>
+                        <!-- {{ form.submit(class='btn btn-block btn-info') }} -->
+                
+                </form>
             <hr>
+            {% endif %}
+
             {% if posts %}
                 {% for post in posts %}
-                <div class="card mb-3">
+                <div class="card mb-3" style="margin-left:30px">
                     <div class="card-header">
-                        <h5 class="m-0">@{{user.username}}</h5>
+                    
                             {% if user.id == current_user.id %}
-                                <a class="btn btn-sm ml-auto" style="background-color:#088256;color:white" href="#">Delete</a>
+                            <table>
+                                <tr>
+                                    <td style="width:1000px"><h5 class="m-0">@{{user.username}}</h5></td>
+                                    <td><a class="btn btn-sm ml-auto" style="background-color:#088256;color:white;float:left" href="#">Delete</a></td>
+                                </tr>
+                            </table>
+                            {% else %}    
+                            <h5 class="m-0">@{{user.username}}</h5>
                             {% endif %}
                     </div>
                     <div class="card-body">
@@ -45,7 +71,7 @@
                 </div>
                 {% endfor %}
             {% else %}
-                <h3>{{user.username}} has no tidings to tell.</h3>
+                <h3 style="margin-left:30px">{{user.username}} has no tidings to tell.</h3>
             {% endif %}
 
         </div>
