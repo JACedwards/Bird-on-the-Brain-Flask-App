@@ -19,7 +19,7 @@
             {% for post in posts %}
             <div class="card mb-3" style="margin-left:30px">
                 <div class="card-header">
-                    <h5 class="m-0">@{{ post.getUsername() }} </h5>
+                    <h5 class="m-0">@{{ post.author.username }} </h5>
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">

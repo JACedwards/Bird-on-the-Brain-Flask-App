@@ -81,10 +81,13 @@
                     <li class="list-group-item">{{ user.first_name}}  {{ user.last_name}}</li>
                     <li class="list-group-item">Bird Brain Member Since {{ user.created.strftime('%Y') }}</li>
                 </ul>
+                
+                {% if user.id != current_user.id %}
                 <div class="card-body">
                     <a href="#" class="btn btn-block btn-info" style="background-color:#088256">(Follow Button Placeholder)</a>
                 </div>
-                </div>
+                {% endif %}
+            </div>
 
 
         </div>

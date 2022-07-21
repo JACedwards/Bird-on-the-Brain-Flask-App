@@ -58,8 +58,7 @@ def users():
 def newsfeed():
     if current_user.is_authenticated:
 
-        """ stuff"""
-        posts=Post.query.order_by(Post.timestamp.desc()).all()
+        posts = current_user.followed_posts()
     else:
         posts=Post.query.order_by(Post.timestamp.desc()).all()
 

@@ -15,6 +15,14 @@ from uuid import uuid4
 from werkzeug.security import generate_password_hash
 from secrets import token_hex
 
+#standalone table used for user/follower relationships, not its own separate object
+
+followers = db.Table(
+    'followers',
+    db.Column('follower_id', db.String, db.ForeignKey('user.id')),
+    db.Column('user_id', db.String, db.ForeignKey('user.id'))
+    
+    )
 
 
 class User(db.Model, UserMixin):
@@ -23,6 +31,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(100), nullable=False, unique=True)
     first_name = db.Column(db.String(100))
     last_name = db.Column(db.String(100))
+    bio = db.Column(db.String(255), default = '(Bio)')
+    fav_bird = db.Column(db.String(40), default = '(Favorite Bird)')
     password = db.Column(db.String(255), nullable=False)
     created = db.Column(db.DateTime, default=datetime.utcnow())
     city = db.Column(db.String(40))
@@ -30,6 +40,14 @@ class User(db.Model, UserMixin):
     county = db.Column(db.String(40)) 
     birding_group = db.Column(db.String(150))
     api_token = db.Column(db.String(100)) 
+    posts = db.relationship('Post', backref='author')
+    followed = db.relationship(
+        'User', 
+        secondary=followers,
+        primaryjoin=(followers.c.follower_id==id), #will find all of the users this user is following
+        secondaryjoin=(followers.c.user_id==id), #will find all of the users who follow this user.
+        backref=db.backref('followers')
+    )
 
     def __init__(self, username, email, password, first_name='', last_name=''):
         self.username = username
@@ -40,6 +58,29 @@ class User(db.Model, UserMixin):
         self.password = generate_password_hash(password)
         self.api_token = str(token_hex(16))
 
+    def follow(self, u):
+        """expects a user object, follows that user"""
+        
+        self.followed.append(u)
+        db.session.commit()
+
+    def unfollow(self, u):
+        """expects a user object, unfollows that user"""
+
+        self.followed.remove(u)
+        db.session.commit()
+
+    def followed_posts(self):
+        """ this fucionts runs database query to get all posts followed by this user, including their own posts"""
+        #gets all posts by people we follow
+        f_posts = Post.query.join(followers, followers.c.user_id == Post.user_id).filter(followers.c.follower_id == self.id)
+        #get own posts
+        own = Post.query.filter_by(user_id=self.id)
+        return f_posts.union(own).order_by(Post.timestamp.desc())
+
+    
+
+
 #Twitter-related Code:  User Post-related model
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,8 +90,11 @@ class Post(db.Model):
     image = db.Column(db.String(500))
     
     #******use this to grab username when using table that doesn't already have username in it.********
-    def getUsername(self):
-        return User.query.get(self.user_id).username
+    # *** Sam create then switch to backref in User Model****
+    # ****Craig still using for Bird model on list search page
+
+    # def getUsername(self):
+    #     return User.query.get(self.user_id).username
 
 
 
