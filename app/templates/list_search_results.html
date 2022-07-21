@@ -23,6 +23,10 @@
         <th scope="col">State</th>
         <th scope="col">Year</th>
         <th scope="col">Comments</th>
+        <th scope="col">Bird Brainer</th>
+
+
+
 
       </tr>
     </thead>
@@ -32,19 +36,22 @@
       {% for x in form %}
             <tr>
                 <th>
-                    {{ x.common_name}}
+                    {{ x.common_name }}
                 </th>
                 <td>
-                    {{ x.county}}
+                    {{ x.county }}
                 <td>
-                    {{ x.state}}
+                    {{ x.state }}
                 </td>
                 <td>
-                    {{ x.date_year}}
+                    {{ x.date_year }}
                 </td>
                 <td>
-                  {{ x.comments}}
-              </td>
+                  {{ x.comments }}
+                </td>
+                <td>
+                  {{ x.getUsername() }}
+                </td>
             </tr>
       {% endfor %}
 

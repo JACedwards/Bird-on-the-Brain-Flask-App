@@ -47,6 +47,10 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.String(40), db.ForeignKey('user.id'))
     image = db.Column(db.String(500))
+    
+    #******use this to grab username when using table that doesn't already have username in it.********
+    def getUsername(self):
+        return User.query.get(self.user_id).username
 
 
 
@@ -108,6 +112,9 @@ class Bird(db.Model):
         self.date_year = dict.get('date_year')
         self.date_month = dict.get('date_month')
         self.date_day = dict.get('date_day')
+
+    def getUsername(self):
+        return User.query.get(self.user_id).username
 
 
 class EBirdSearch(db.Model):

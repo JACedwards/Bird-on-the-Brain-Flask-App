@@ -11,6 +11,33 @@
 
 <hr style="border: 5px solid #088256;">
 
+<div class="row justify-content-center">
+    <h4 class="text-center m-0">Recent Chirps</h4></div>
+    <hr>
+    <div class="row justify-content-center"> 
+        <div class="col-7">
+            {% for post in posts %}
+            <div class="card mb-3" style="margin-left:30px">
+                <div class="card-header">
+                    <h5 class="m-0">@{{ post.getUsername() }} </h5>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p> {{ post.body}} </p>
+                        <footer class="blockquote-footer"><cite title="Source Title">{{ post.timestamp.strftime('%Y/%#m/%#d (%#I:%M %p)') }}</cite></footer>
+                    </blockquote>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+    </div>
+
 
 
 

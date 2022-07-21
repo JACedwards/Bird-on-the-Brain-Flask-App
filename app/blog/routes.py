@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
-from app.models import db, User, Post
+from app.models import db, User, Post, load_user
 from .blogforms import PostForm
 from flask_login import current_user, login_required
 
@@ -56,5 +56,12 @@ def users():
 
 @blog.route('/newsfeed')
 def newsfeed():
-    return render_template('newsfeed.html')
+    if current_user.is_authenticated:
+
+        """ stuff"""
+        posts=Post.query.order_by(Post.timestamp.desc()).all()
+    else:
+        posts=Post.query.order_by(Post.timestamp.desc()).all()
+
+    return render_template('newsfeed.html', posts=posts)
 
