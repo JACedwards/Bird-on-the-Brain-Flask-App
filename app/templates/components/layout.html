@@ -62,13 +62,14 @@
                     <a style="color:white" class="nav-link" href="{{ url_for('blog.newsfeed', username=current_user.username) }}">Bird Feed &nbsp;&nbsp;&#8226;</a>
                 </li>
                 <li class="nav-item active">
+                    <a style="color:white" class="nav-link" href="{{ url_for('blog.users') }}">Find Users &nbsp;&nbsp;&#8226;</a>
+                </li>
+                <li class="nav-item active">
                     <a style="color:white" class="nav-link" href="{{ url_for('auth.logout') }}">Sign Out</a>
                 </li>
                 {% else %}
+
                 <li class="nav-item active ml-auto">
-                    <a style="color:white" class="nav-link" href="{{ url_for('blog.userProfile', username=current_user.username) }}">Chirp @ Charm &nbsp;&nbsp;&#8226;</a>
-                </li>
-                <li class="nav-item active">
                     <a style="color:white" class="nav-link" href="{{ url_for('blog.newsfeed', username=current_user.username) }}">Bird Feed &nbsp;&nbsp;&#8226;</a>
                 </li>
                 <li class="nav-item active">

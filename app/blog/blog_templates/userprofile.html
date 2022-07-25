@@ -81,10 +81,18 @@
                     <li class="list-group-item">{{ user.first_name}}  {{ user.last_name}}</li>
                     <li class="list-group-item">Bird Brain Member Since {{ user.created.strftime('%Y') }}</li>
                 </ul>
+
+                {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-block btn-info" style="background-color:#088256">Sign in to follow</a>
                 
-                {% if user.id != current_user.id %}
+
+                {% elif user.id != current_user.id %}
                 <div class="card-body">
-                    <a href="#" class="btn btn-block btn-info" style="background-color:#088256">(Follow Button Placeholder)</a>
+                    {% if user in current_user.followed %}
+                    <a href="{{ url_for('blog.unfollow', uid=user.id) }}" class="btn btn-block btn-info" style="background-color:#088256">Unfollow</a>
+                    {% else %}
+                    <a href="{{ url_for('blog.follow', uid=user.id) }}" class="btn btn-block btn-info" style="background-color:#088256">Follow</a>
+                    {% endif %}
                 </div>
                 {% endif %}
             </div>

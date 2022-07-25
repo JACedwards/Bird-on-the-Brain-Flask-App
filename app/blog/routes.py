@@ -59,9 +59,26 @@ def newsfeed():
     if current_user.is_authenticated:
 
         posts = current_user.followed_posts()
+        print(current_user.followed)
     else:
         posts=Post.query.order_by(Post.timestamp.desc()).all()
-        
+    
 
     return render_template('newsfeed.html', posts=posts)
+
+@blog.route('/follow/<string:uid>')
+@login_required
+def follow(uid):
+    u = User.query.get(uid)
+    current_user.follow(u)
+    flash(f'You are now following @{u.username}', category = 'success')
+    return redirect(url_for('blog.userProfile', username=u.username))
+
+@blog.route('/unfollow/<string:uid>')
+@login_required
+def unfollow(uid):
+    u = User.query.get(uid)
+    current_user.unfollow(u)
+    flash(f'You are no longer following @{u.username}', category = 'info')
+    return redirect(url_for('blog.userProfile', username=u.username))
 
