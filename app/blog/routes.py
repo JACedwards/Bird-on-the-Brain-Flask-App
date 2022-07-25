@@ -61,6 +61,7 @@ def newsfeed():
         posts = current_user.followed_posts()
     else:
         posts=Post.query.order_by(Post.timestamp.desc()).all()
+        
 
     return render_template('newsfeed.html', posts=posts)
 
