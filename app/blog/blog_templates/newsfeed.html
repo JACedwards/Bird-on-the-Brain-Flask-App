@@ -13,12 +13,12 @@
 
 <div class="row justify-content-center">
     <h4 class="text-center m-0">Recent Chirps</h4></div>
-    <hr>
+    <hr style="background-color:#088256">
     <div class="row justify-content-center"> 
         <div class="col-7">
             {% for post in posts %}
-            <div class="card mb-3" style="margin-left:30px">
-                <div class="card-header">
+            <div class="card mb-3" style="margin-left:30px;border: 1px solid #088256">
+                <div class="card-header" style="background-color:#088256;color:white">
                     <h5 class="m-0">@{{ post.author.username }} </h5>
                 </div>
                 <div class="card-body">
