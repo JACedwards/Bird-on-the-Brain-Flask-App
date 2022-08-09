@@ -207,26 +207,46 @@ class EvilCatFact(db.Model):
 #         self.outing = outing
 
 
+class React(db.Model):
+    # *****See code at bottom to help with this issue?  
+    # Is ID below the same as User Id or is ti id for bird sighting row? 
+    # ********** Might NEED to ADD ID of User who made this sighting******* 
+    # Christopher gave me some code in slack too****
+
+    common_name = db.Column(db.String(100), primary_key=True)
+    latin_name = db.Column(db.String(100))
+    image = db.Column(db.String(100))
+    habitat = db.Column(db.String(75))
+    diet = db.Column(db.String(75))
+    pledge = db.Column(db.Integer)
+    fun_fact = db.Column(db.String(150))
+    conservation = db.Column(db.String(30))
+    location = db.Column(db.String(75))
+
+    def __init__(self, dict):
+        
+        self.common_name = dict.get('common_name')
+        self.latin_name = dict.get('latin_name')
+        self.image = dict.get('image')
+        self.habitat = dict.get('habitat')
+        self.diet = dict.get('diet')
+        self.pledge = dict.get('pledge')
+        self.fun_fact = dict.get('fun_fact')
+        self.conservation = dict.get('conservation')
+        self.location = dict.get('location')
 
 #Jsonify object to a dictionary
     def to_dict(self):
         return {
-            'bird_id': self.bird_id,
             'common_name': self.common_name,
-            'country,': self.county,
-            'state': self.state,
-            'date': self.date,
             'latin_name': self.latin_name,
-            'city': self.city,
-            'comments': self.comments,
             'image': self.image,
             'habitat': self.habitat,
             'diet': self.diet,
-            'behaviors': self.behaviors,
-            'weight_g': self.weight_g,
-            'price': self.price,
+            'location': self.location,
+            'fun_fact': self.fun_fact,
+            'pledge': self.pledge,
             'conservation': self.conservation,
-            'created_on' : self.created_on
         }
 
     def from_dict(self, dict):

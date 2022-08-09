@@ -2,13 +2,14 @@ from flask import Blueprint, jsonify, request, render_template, url_for, flash, 
 from pkg_resources import working_set
 from sqlalchemy import null
 api = Blueprint('api', __name__, url_prefix='/api')
-from app.models import Bird, db, EBirdSearch, EvilCatFact
+from app.models import Bird, db, EBirdSearch, EvilCatFact, React
 from .services import token_required, getCountyByDate
 from .apiforms import BirdForm, ListSearchForm, EbirdSearchForm, AnnualListForm, EvilCatFactForm
 from flask_login import current_user, login_required
 from ebird.api import get_region, get_adjacent_regions, get_regions, get_observations
 import requests as r
 import random
+import json
 
 
 
@@ -244,13 +245,25 @@ def fetchEvilCatFact():
 #Will Add here if I find it.
 
 # SCREWED WITH THIS  and got it to work.  The change was so that jason data was a list of dictionaries.
-@api.route('/birds', methods=['GET'])
+@api.route('/react', methods=['GET'])
 def getBirds():
-    birds = Bird.query.all()
-    print(birds)
-    birds = {a.bird_id: a.to_dict() for a in birds} 
+    birds = React.query.all()
+    birds = {a.common_name: a.to_dict() for a in birds}
     return jsonify(birds), 200
+    
+    # birds = {x.bird_id: x for x in birds}
+    # print(birds)
+    # return jsonify(birds), 200
 
+    # animals = Animal.query.all()
+    # # we discovered that we cannot directly JSONify a Python object
+    # # so we need to transform this list of animals into either a list of dictionaries or a dictionary of dictionaries or some similar structure
+    # print(animals)
+    # #animals = [a.to_dict() for a in animals] # list comprehension version
+    # animals = {a.id: a.to_dict() for a in animals} # dictionary comprehension version
+    # return jsonify(animals), 200
+
+    
     # birds = [bird.to_dict() for bird in Bird.query.all()]
     # jsonify(birds.to_dict()), 200
     # return jsonify(birds), 200
