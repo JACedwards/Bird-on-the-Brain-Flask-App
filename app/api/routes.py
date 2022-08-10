@@ -247,8 +247,9 @@ def fetchEvilCatFact():
 # SCREWED WITH THIS  and got it to work.  The change was so that jason data was a list of dictionaries.
 @api.route('/react', methods=['GET'])
 def getBirds():
-    birds = React.query.all()
-    birds = {a.common_name: a.to_dict() for a in birds}
+    # birds = React.query.all()
+    birds = {'Birds': [a.to_dict() for a in React.query.all()]}
+    # birds = {a.common_name: a.to_dict() for a in birds}
     return jsonify(birds), 200
     
     # birds = {x.bird_id: x for x in birds}

@@ -208,10 +208,6 @@ class EvilCatFact(db.Model):
 
 
 class React(db.Model):
-    # *****See code at bottom to help with this issue?  
-    # Is ID below the same as User Id or is ti id for bird sighting row? 
-    # ********** Might NEED to ADD ID of User who made this sighting******* 
-    # Christopher gave me some code in slack too****
 
     common_name = db.Column(db.String(100), primary_key=True)
     latin_name = db.Column(db.String(100))
