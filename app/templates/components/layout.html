@@ -31,22 +31,22 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     {# url_for('route function name') creates a link to that route #}
-                    <a style="color:white" class="nav-link" href="{{ url_for('home') }}">Home &nbsp;&#8226;</a>
+                    <a style="color:white" class="nav-link" href="{{ url_for('home') }}">&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{url_for('api.postSighting') }}">Add Bird &nbsp;&#8226;</a>
+                    <a style="color:white" class="nav-link" href="{{url_for('api.postSighting') }}">Add&nbsp;Bird &nbsp;&nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{url_for('api.getAnnualList') }}">Annual & Lifetime Lists &nbsp;&#8226;</a>
+                    <a style="color:white" class="nav-link" href="{{url_for('api.getAnnualList') }}">Annual&nbsp;&&nbsp;Lifetime &nbsp;&nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{url_for('api.internalSearch') }}">Bird Brain Search &nbsp;&#8226;</a>
+                    <a style="color:white" class="nav-link" href="{{url_for('api.internalSearch') }}">Bird&nbsp;Brain&nbsp;Search &nbsp;&nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{url_for('api.eBirdSearchFunction') }}">eBird Search &nbsp;&#8226;</a>
+                    <a style="color:white" class="nav-link" href="{{url_for('api.eBirdSearchFunction') }}">eBird&nbsp;Search &nbsp;&nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{url_for('api.fetchEvilCatFact') }}">The Enemy</a>
+                    <a style="color:white" class="nav-link" href="{{url_for('api.fetchEvilCatFact') }}">The&nbsp;Enemy</a>
                 </li>
             </ul>
 
@@ -56,24 +56,24 @@
             <ul class="navbar-nav ml-auto">
                 {% if current_user.is_authenticated %}
                 <li class="nav-item active ml-auto">
-                    <a style="color:white" class="nav-link" href="{{ url_for('blog.userProfile', username=current_user.username) }}">Chirp @ Charm &nbsp;&nbsp;&#8226;</a>
+                    <a style="color:white" class="nav-link" href="{{ url_for('blog.userProfile', username=current_user.username) }}">Chirp&nbsp;@&nbsp;Charm &nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{ url_for('blog.newsfeed', username=current_user.username) }}">Bird Feed &nbsp;&nbsp;&#8226;</a>
+                    <a style="color:white" class="nav-link" href="{{ url_for('blog.newsfeed', username=current_user.username) }}">Bird&nbsp;Feed &nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{ url_for('blog.users') }}">Find Users &nbsp;&nbsp;&#8226;</a>
+                    <a style="color:white" class="nav-link" href="{{ url_for('blog.users') }}">Find&nbsp;Bird Brainers &nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{ url_for('auth.logout') }}">Sign Out</a>
+                    <a style="color:white" class="nav-link" href="{{ url_for('auth.logout') }}">Sign&nbsp;Out</a>
                 </li>
                 {% else %}
 
                 <li class="nav-item active ml-auto">
-                    <a style="color:white" class="nav-link" href="{{ url_for('blog.newsfeed', username=current_user.username) }}">Bird Feed &nbsp;&nbsp;&#8226;</a>
+                    <a style="color:white" class="nav-link" href="{{ url_for('blog.newsfeed', username=current_user.username) }}">Bird&nbsp;Feed &nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{ url_for('auth.login') }}">Sign In &nbsp;&nbsp;&#8226;</a>
+                    <a style="color:white" class="nav-link" href="{{ url_for('auth.login') }}">Sign&nbsp;In &nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <li class="nav-item active">
                     <a style="color:white" class="nav-link" href="{{ url_for('auth.register') }}">Register</a>

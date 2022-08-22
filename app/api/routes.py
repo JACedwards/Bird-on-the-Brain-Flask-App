@@ -17,7 +17,7 @@ import json
 
 # leaving out validate on submit for now
 @api.route('/sighting', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def postSighting():
     bform = BirdForm()
     if request.method == 'POST':
