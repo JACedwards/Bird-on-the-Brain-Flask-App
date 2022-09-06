@@ -17,7 +17,7 @@ import json
 
 # leaving out validate on submit for now
 @api.route('/sighting', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def postSighting():
     bform = BirdForm()
     if request.method == 'POST':
@@ -101,25 +101,34 @@ def getAnnualList():
 
     if request.method == 'POST':
         
-        gal_search=galform.data
-        print('this is gal_search', gal_search)
-        for k , v in gal_search.items():
-            if v == '':
-                which_list = k
-        
-        if which_list == 'annual':
-            search_results = Bird.query.filter_by(annual=which_list).all()
-            # print('this is search results', search_results)
-        elif which_list == 'lifetime':
-            search_results = Bird.query.filter_by(lifetime=which_list).all()
-            # print('this is search results', search_results)
-        # search_input = Bird(gal_search)
-        # print('this is search_input.annual', search_input.annual)
-        
-        
-        # return 'testing'
-           
-        return render_template('annual_list_results.html', form = search_results,header=which_list ) 
+        if current_user.is_authenticated:
+
+            gal_search=galform.data
+            
+            print(f'this is current users id" {current_user.id}')
+            print('this is gal_search', gal_search)
+            for k , v in gal_search.items():
+                if v == '':
+                    which_list = k
+            
+            if which_list == 'annual':
+                search_results = Bird.query.filter_by(annual=which_list).filter_by(user_id=current_user.id).filter_by(date_year='2022')
+
+                # print('this is search results', search_results)
+            elif which_list == 'lifetime':
+                search_results = Bird.query.filter_by(lifetime=which_list).filter_by(user_id=current_user.id)
+                # print('this is search results', search_results)
+            # search_input = Bird(gal_search)
+            # print('this is search_input.annual', search_input.annual)
+            
+            
+            # return 'testing'
+            
+            return render_template('annual_list_results.html', form = search_results,header=which_list ) 
+
+        else:
+            flash('Please log in to use access your annual or lifetime lists.', 'info')
+            return redirect(url_for('auth.login'))
 
     else:
       
