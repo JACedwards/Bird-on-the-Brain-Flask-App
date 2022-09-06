@@ -10,6 +10,7 @@ from ebird.api import get_region, get_adjacent_regions, get_regions, get_observa
 import requests as r
 import random
 import json
+from datetime import datetime
 
 
 
@@ -112,7 +113,9 @@ def getAnnualList():
                     which_list = k
             
             if which_list == 'annual':
-                search_results = Bird.query.filter_by(annual=which_list).filter_by(user_id=current_user.id).filter_by(date_year='2022')
+                current_datetime = datetime.utcnow()
+                current_year = current_datetime.strftime('%Y')
+                search_results = Bird.query.filter_by(annual=which_list).filter_by(user_id=current_user.id).filter_by(date_year=current_year)
 
                 # print('this is search results', search_results)
             elif which_list == 'lifetime':
