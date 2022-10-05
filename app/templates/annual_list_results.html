@@ -28,15 +28,15 @@
       {% for x in form %}
             <tr>
                 <th scope="row">
-                    {{ x.common_name}}
+                    {{ x['common_name'] }}
                 </th>
                 <td>
-                    {{ x.county}}
+                    {{ x['county'] }}
                 <td>
-                    {{ x.state}}
+                    {{ x['state'] }}
                 </td>
                 <td>
-                    {{ x.date_year}}
+                    {{ x['date_year'] }}
                 </td>
             </tr>
       {% endfor %}

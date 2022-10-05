@@ -100,6 +100,13 @@ def getAnnualList():
     
     galform = AnnualListForm()
 
+    #Need to solve problem of any given bird showing up twice in annual or lifetime:
+        #Try .one():  https://stackoverflow.com/questions/29161730/what-is-the-difference-between-one-and-first  
+        #above URL probably won't work
+        # Or, turn search_results into set?
+        #maybe use Pandas, drop duplicate?
+        #maybe use limit parameter, but don't think will work
+        #look at long version of clear ballot
     if request.method == 'POST':
         
         if current_user.is_authenticated:
@@ -116,18 +123,43 @@ def getAnnualList():
                 current_datetime = datetime.utcnow()
                 current_year = current_datetime.strftime('%Y')
                 search_results = Bird.query.filter_by(annual=which_list).filter_by(user_id=current_user.id).filter_by(date_year=current_year)
+                
+                #beginning of removing duplicates:
+                ind_dict = {}
+                list_dicts = []
+                for x in search_results:
+                    ind_dict = x.__dict__
+                    list_dicts.append(ind_dict)
+                #have list of dictionaries here, still containing duplicate birds
+                existing_dicts = set()
+                filtered_list = []
+                for d in list_dicts:
+                    if d['common_name'] not in existing_dicts:
+                        existing_dicts.add(d['common_name'])
+                        filtered_list.append(d)
+                # print(filtered_list)
+                #filtered_list = duplicate removed (toucan removed in my case)
 
-                # print('this is search results', search_results)
+                
             elif which_list == 'lifetime':
                 search_results = Bird.query.filter_by(lifetime=which_list).filter_by(user_id=current_user.id)
-                # print('this is search results', search_results)
-            # search_input = Bird(gal_search)
-            # print('this is search_input.annual', search_input.annual)
+                #begin remove duplicates from lifetime
+                ind_dict = {}
+                list_dicts = []
+                for x in search_results:
+                    ind_dict = x.__dict__
+                    list_dicts.append(ind_dict)
+                #have list of dictionaries here, still containing duplicate birds
+                existing_dicts = set()
+                filtered_list = []
+                for d in list_dicts:
+                    if d['common_name'] not in existing_dicts:
+                        existing_dicts.add(d['common_name'])
+                        filtered_list.append(d)
+                # print(filtered_list)
+
             
-            
-            # return 'testing'
-            
-            return render_template('annual_list_results.html', form = search_results,header=which_list ) 
+            return render_template('annual_list_results.html', form = filtered_list,header=which_list ) 
 
         else:
             flash('Please log in to use access your annual or lifetime lists.', 'info')
