@@ -3,7 +3,7 @@ from pkg_resources import working_set
 from sqlalchemy import null
 api = Blueprint('api', __name__, url_prefix='/api')
 from app.models import Bird, db, EBirdSearch, EvilCatFact, React
-from .services import token_required, getCountyByDate
+from .services import token_required
 from .apiforms import BirdForm, ListSearchForm, EbirdSearchForm, AnnualListForm, EvilCatFactForm
 from flask_login import current_user, login_required
 from ebird.api import get_region, get_adjacent_regions, get_regions, get_observations
@@ -143,22 +143,20 @@ def getAnnualList():
                 
             elif which_list == 'lifetime':
                 search_results = Bird.query.filter_by(lifetime=which_list).filter_by(user_id=current_user.id)
-                #begin remove duplicates from lifetime
+                #convert Bird query objects to list of dictionaries
                 ind_dict = {}
                 list_dicts = []
                 for x in search_results:
                     ind_dict = x.__dict__
                     list_dicts.append(ind_dict)
-                #have list of dictionaries here, still containing duplicate birds
+                #Removing dictionaries containing bird dublicates
                 existing_dicts = set()
                 filtered_list = []
                 for d in list_dicts:
                     if d['common_name'] not in existing_dicts:
                         existing_dicts.add(d['common_name'])
                         filtered_list.append(d)
-                # print(filtered_list)
-
-            
+                            
             return render_template('annual_list_results.html', form = filtered_list,header=which_list ) 
 
         else:
@@ -240,25 +238,61 @@ def internalSearch():
 
 @api.route('/ebird_search', methods=['GET', 'POST'])
 def eBirdSearchFunction():
-    
+    ###would be best to make all three cells required as more userfriendl way of handling not entering any data in field at all (than what currently doing).
+
     ebform = EbirdSearchForm()
 
     if request.method == 'POST': 
+          
+        eb_search=ebform.data
+        eb_search_input=EBirdSearch(eb_search)
 
-        try:        
-            eb_search=ebform.data
-            eb_search_input=EBirdSearch(eb_search)
-            search_results = getCountyByDate(eb_search_input.state.title(), eb_search_input.county.title(), eb_search_input.days)
-            print(search_results)
-            if search_results == []:
-                flash('No sightings were reported during timeframe requested. Try increasing number of days.', category='danger')
-                return redirect(url_for('api.eBirdSearchFunction')) 
+        state_code = get_regions('bdhdkslf0ktt', 'subnational1', 'US')
+        # print(state_code)
+        # above = dictionary of state codes
 
-            else:
-                return render_template('ebird_search_results.html', form = search_results, form_state=eb_search_input.state, form_county=eb_search_input.county, form_days=eb_search_input.days)
-        except:
-            flash('Records not found.  Please check state & county spelling, and be sure to enter 1-30 days.', category='danger')
+        #Gets eBird state code:
+        miss_state = []
+        for y in state_code:
+            if y['name'] == eb_search_input.state.title():
+                country_state = y['code']
+                # above = "US-NY" if New york put into form
+                miss_state.append(country_state)
+                print(country_state)
+        #Error Handling:  Check for missing/mispelled state:
+        if miss_state == []:
+            flash('Valid STATE name not entered.  Please check spelling, and try again', category='danger')
             return redirect(url_for('api.eBirdSearchFunction'))
+
+        #Gets eBird County code:
+        county_code = get_regions('bdhdkslf0ktt', 'subnational2', f'{country_state}')
+        print(county_code)
+
+        miss_county = []
+        for x in county_code:
+            if x['name'] == eb_search_input.county.title():
+                country_state_county = x['code']
+                miss_county.append(country_state_county)
+        if miss_county == []:
+            flash('Valid COUNTY name not entered.  Please check spelling, and try again', category='danger')
+            return redirect(url_for('api.eBirdSearchFunction'))
+
+        
+        try:
+            records = get_observations('bdhdkslf0ktt', f'{country_state_county}', back=f"{eb_search_input.days}")
+            
+            if records == []:
+                flash('No sightings were reported during timeframe requested. Try increasing number of days.', category='danger')
+                return redirect(url_for('api.eBirdSearchFunction'))
+
+            
+            return render_template('ebird_search_results.html', form = records, form_state=eb_search_input.state, form_county=eb_search_input.county, form_days=eb_search_input.days)
+        except:
+                #Error handling: no number or '0' entered for days
+                flash('Please enter a number of days from 1-30.', category='danger')
+                return redirect(url_for('api.eBirdSearchFunction'))
+
+
             
 
     return render_template('ebird_search.html', form=ebform)
