@@ -37,10 +37,10 @@ class ListSearchForm(FlaskForm):
 
 class EbirdSearchForm(FlaskForm):
     country = StringField('Country')
-    state = StringField('State')
-    county = StringField('County')
+    state = StringField('State', validators=[DataRequired()])
+    county = StringField('County', validators=[DataRequired()])
     obsDate = StringField('Date')
-    days = StringField('Days')
+    days = StringField('Days', validators=[DataRequired()])
     hotspots = StringField('Hotspots')
     interesting = StringField('Interesting Birds')
     comName = StringField('Bird')
