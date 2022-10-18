@@ -246,6 +246,12 @@ def eBirdSearchFunction():
           
         eb_search=ebform.data
         eb_search_input=EBirdSearch(eb_search)
+        print(eb_search['days'])
+        print(eb_search_input)
+
+        if int(eb_search['days']) > 30:
+            flash(f"You entered {eb_search['days']} days.  Please enter a number of days between 1 and 30.", category='danger')
+            return redirect(url_for('api.eBirdSearchFunction'))
 
         state_code = get_regions('bdhdkslf0ktt', 'subnational1', 'US')
         # print(state_code)
@@ -258,15 +264,15 @@ def eBirdSearchFunction():
                 country_state = y['code']
                 # above = "US-NY" if New york put into form
                 miss_state.append(country_state)
-                print(country_state)
+                # print(country_state)
         #Error Handling:  Check for missing/mispelled state:
         if miss_state == []:
-            flash('Valid STATE name not entered.  Please check spelling, and try again', category='danger')
+            flash('Valid STATE name was not entered.  Please check spelling, and try again', category='danger')
             return redirect(url_for('api.eBirdSearchFunction'))
 
         #Gets eBird County code:
         county_code = get_regions('bdhdkslf0ktt', 'subnational2', f'{country_state}')
-        print(county_code)
+        # print(county_code)
 
         miss_county = []
         for x in county_code:
@@ -274,7 +280,7 @@ def eBirdSearchFunction():
                 country_state_county = x['code']
                 miss_county.append(country_state_county)
         if miss_county == []:
-            flash('Valid COUNTY name not entered.  Please check spelling, and try again', category='danger')
+            flash('Valid COUNTY name was not entered.  Please check spelling, and try again', category='danger')
             return redirect(url_for('api.eBirdSearchFunction'))
 
         
