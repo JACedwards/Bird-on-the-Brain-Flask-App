@@ -15,7 +15,6 @@ from uuid import uuid4
 from werkzeug.security import generate_password_hash
 from secrets import token_hex
 
-#standalone table used for user/follower relationships, not its own separate object
 
 followers = db.Table(
     'followers',
@@ -71,7 +70,7 @@ class User(db.Model, UserMixin):
         db.session.commit()
 
     def followed_posts(self):
-        """ this fucionts runs database query to get all posts followed by this user, including their own posts"""
+        """ database query to get all posts followed by this user, including their own posts"""
         #gets all posts by people we follow
         f_posts = Post.query.join(followers, followers.c.user_id == Post.user_id).filter(followers.c.follower_id == self.id)
         #get own posts
@@ -79,31 +78,15 @@ class User(db.Model, UserMixin):
         return f_posts.union(own).order_by(Post.timestamp.desc())
 
     
-
-
-#Twitter-related Code:  User Post-related model
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(400))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.String(40), db.ForeignKey('user.id'))
     image = db.Column(db.String(500))
-    
-    #******use this to grab username when using table that doesn't already have username in it.********
-    # *** Sam create then switch to backref in User Model****
-    # ****Craig still using for Bird model on list search page
-
-    # def getUsername(self):
-    #     return User.query.get(self.user_id).username
-
 
 
 class Bird(db.Model):
-    # *****See code at bottom to help with this issue?  
-    # Is ID below the same as User Id or is ti id for bird sighting row? 
-    # ********** Might NEED to ADD ID of User who made this sighting******* 
-    # Christopher gave me some code in slack too****
-
     user_id = db.Column(db.String(40))
     bird_id = db.Column(db.String(40), primary_key=True)
     common_name = db.Column(db.String(100), nullable=False)
@@ -250,55 +233,4 @@ class React(db.Model):
             getattr(self, key) 
             setattr(self, key, dict[key])
 
-    # See below for error handling when try to update Postgress database with this Python code 
-    # when this chages.  (Thiis is at minute 1:00:00 in Flask Video Day5 AM )
-
-
-        
-
-
-
-    # Info may be found at https://www.allaboutbirds.org/guide/browse/taxonomy#
-    #URL's are names are very specific names of birds
-    #could do some general search categories though
-    # following would take user to results for general search for "duck"
-    #having lots of specific duck options
-    #https://www.allaboutbirds.org/news/search/?q=duck
-
-
-# class Post(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(80), nullable=False)
-#     body = db.Column(db.Text, nullable=False)
-#     pub_date = db.Column(db.DateTime, nullable=False,
-#         default=datetime.utcnow)
-
-#     category_id = db.Column(db.Integer, db.ForeignKey('category.id'),
-#         nullable=False)
-#     category = db.relationship('Category',
-#         backref=db.backref('posts', lazy=True))
-
-#     def __repr__(self):
-#         return '<Post %r>' % self.title
-
-
-# class Category(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(50), nullable=False)
-
-#     def __repr__(self):
-#         return '<Category %r>' % self.name
-
-
-# Errors for updating Model from Python to Postgresql:
-
-# Sam Davitt:	2 potential solutions to rejected database migrations
-# 02:39:42	Sam Davitt:	1. delete the migrations folder and try to redo your flask db init
-# 02:39:56	Sam Davitt:	2. delete the alembic table in your database (drop table statement)
-# 02:40:18	Sam Davitt:	that would be for errors relating to rejected migrations based on unrelated histories or similar errors
-# 02:40:54	Sam Davitt:	if you have an error about a rejected migration due to data types not matching or data not matching, you will likely have to remove any data currently in the database (such as our Fennec Fox animal)
-# 02:44:45	Kristen Bieler:	I got an error that says “no module named 'api’. What am I missing?
-# 02:54:21	Sam Davitt:	when changing the datatype of a serial primary key
-# 02:54:39	Sam Davitt:	we must do so manually in our database as SQLAlchemy and flask-migrate always seem to fail at this specific operation
-# 02:55:40	Sam Davitt:	ALTER TABLE animal ALTER COLUMN id TYPE varchar(40);
-# May have to update any modify datatype of primary key column and may have to be done manually in postres database.
+    

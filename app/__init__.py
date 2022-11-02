@@ -33,6 +33,6 @@ login.login_message = 'Please log in to see this page.'
 login.login_message_category = 'danger'
 
 
-from . import routes  #from the "app" folder import the entire routes file
+from . import routes  
 
 
