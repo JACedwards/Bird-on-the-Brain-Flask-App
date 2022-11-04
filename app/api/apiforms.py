@@ -49,10 +49,11 @@ class EbirdSearchForm(FlaskForm):
     submit = SubmitField()
 
 class AnnualListForm(FlaskForm):
-    annual = StringField('Annual')
+    annual = StringField('Annual') 
     lifetime = StringField('Lifetime')
     backyard = StringField('Backyard')
     outing = StringField('Outing')
+    all = StringField('All My Sightings')  #added so can add this to lifetime/annual page / haven't done db migrate
     submit = SubmitField()
 
 class EvilCatFactForm(FlaskForm):
