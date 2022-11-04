@@ -238,7 +238,6 @@ def internalSearch():
 
 @api.route('/ebird_search', methods=['GET', 'POST'])
 def eBirdSearchFunction():
-    ###would be best to make all three cells required as more userfriendl way of handling not entering any data in field at all (than what currently doing).
 
     ebform = EbirdSearchForm()
 
@@ -246,15 +245,14 @@ def eBirdSearchFunction():
           
         eb_search=ebform.data
         eb_search_input=EBirdSearch(eb_search)
-        print(eb_search['days'])
-        print(eb_search_input)
+        # print(eb_search['hotspots'])
+
 
         if int(eb_search['days']) > 30:
             flash(f"You entered {eb_search['days']} days.  Please enter a number of days between 1 and 30.", category='danger')
             return redirect(url_for('api.eBirdSearchFunction'))
 
         state_code = get_regions('bdhdkslf0ktt', 'subnational1', 'US')
-        # print(state_code)
         # above = dictionary of state codes
 
         #Gets eBird state code:
