@@ -26,7 +26,7 @@ def postSighting():
         id=current_user.id
         sighting['user_id']=id
         bird = Bird(sighting)
-        # **object comprised of form input with addition of user_id
+        # object comprised of form input with addition of user_id
     
         list_bird_dicts = []
         search_input=Bird.query.filter_by(common_name=bird.common_name).all()
@@ -38,8 +38,8 @@ def postSighting():
             db.session.add(bird)
             db.session.commit()
 
-
-        # **probably need error handling here if query returns empty list?
+        # Checks to see if sighted bird already in annual list
+        #   if not, adds to annual list
         a=''
         for x in search_input:
             bird_dict = x.__dict__
@@ -48,17 +48,15 @@ def postSighting():
         for x in list_bird_dicts:
             if x['annual'] == 'annual':
                 a = 'annual'
-                # **no change to bird (object)
             else:
                 a = 'missing'
 
         if a == 'missing':
             bird.__dict__['annual']='annual'
-            # input_annual = bird.__dict__
-            # input_annual['annual']='annual'
 
+        # Checks to see if sighted bird already in lifetime list
+        #   if not, adds to lifetime list
         b=''
-        # Lifetime Check Starts
         for y in list_bird_dicts:
             if y['lifetime'] == 'lifetime':
                 b = 'lifetime'
@@ -66,47 +64,26 @@ def postSighting():
                 b = None
 
         if b == None:
-            bird.__dict__['lifetime']='lifetime'
-
-       
-        print(bird.__dict__)
-           
+            bird.__dict__['lifetime']='lifetime'           
+        
         db.session.add(bird)
         db.session.commit()
 
+        #Could make this more specific, indicating which of three lists this particular
+            #bird has been added to.
         flash(f'{bird.common_name} has been added to your lists.', category = 'success')
                 
         return redirect(url_for('api.postSighting'))
     else:
-        # #next three lines were my attempt to grab token from user table
-        # print(current_user, current_user.api_token)
-        # header = {'birds-access-token': current_user.api_token}
-        # return render_template('sighting.html', form=bform, headers = header)
         return render_template('sighting.html', form=bform)
-
-
-
-
 
 
 @api.route('/annual_list', methods=['GET', 'POST'])
 # @token_required
 def getAnnualList():
-    
-    
-    # Do conditionals here so both annual and lifetime working_set
-    # Ave for later yearfield variable to filter by year
-    # For now, just cheat and only enter 2022 as samples in database
-    
+       
     galform = AnnualListForm()
 
-    #Need to solve problem of any given bird showing up twice in annual or lifetime:
-        #Try .one():  https://stackoverflow.com/questions/29161730/what-is-the-difference-between-one-and-first  
-        #above URL probably won't work
-        # Or, turn search_results into set?
-        #maybe use Pandas, drop duplicate?
-        #maybe use limit parameter, but don't think will work
-        #look at long version of clear ballot
     if request.method == 'POST':
         
         if current_user.is_authenticated:
@@ -134,11 +111,14 @@ def getAnnualList():
                 existing_dicts = set()
                 filtered_list = []
                 for d in list_dicts:
+                    #make sure don't have capitalization match issue here.
+                    #Think I made sure all new birds added in title case
+                    #so should be ok here.
+                    # if problem here, need to fix in line 136 too
                     if d['common_name'] not in existing_dicts:
                         existing_dicts.add(d['common_name'])
                         filtered_list.append(d)
-                # print(filtered_list)
-                #filtered_list = duplicate removed (toucan removed in my case)
+
 
                 
             elif which_list == 'lifetime':
@@ -169,12 +149,11 @@ def getAnnualList():
 
 
 
-# ***does not throw error if user puts in bird, year, country or state that is not in database***
+# ***does not yet throw error if user puts in bird, year, country or state that is not in database***
 
 @api.route('/list_search', methods=['GET', 'POST'])
 # @token_required
 def internalSearch():
-    # return 'This is the list search page'
     lsform = ListSearchForm()
     if request.method == 'POST':
         
@@ -214,11 +193,8 @@ def internalSearch():
                 which_list = 'State'
 
             return render_template('list_search_results.html', form = search_results, key=which_list, value=which_list_value) 
-            # flash(f'{bird.common_name} has been added to your list.', category = 'success')        
-            # return redirect(url_for('api.postSighting'))
-   
+
     else:
-        # return render_template('list_search', form=lssearch)
         return render_template('list_search.html', form=lsform)
 
 
@@ -245,32 +221,30 @@ def eBirdSearchFunction():
           
         eb_search=ebform.data
         eb_search_input=EBirdSearch(eb_search)
-        # print(eb_search['hotspots'])
 
 
         if int(eb_search['days']) > 30:
             flash(f"You entered {eb_search['days']} days.  Please enter a number of days between 1 and 30.", category='danger')
             return redirect(url_for('api.eBirdSearchFunction'))
-
+        
+        # dictionary of state codes
         state_code = get_regions('bdhdkslf0ktt', 'subnational1', 'US')
-        # above = dictionary of state codes
-
-        #Gets eBird state code:
+ 
+        #Gets eBird state code for spelled out state entered in form:
         miss_state = []
         for y in state_code:
             if y['name'] == eb_search_input.state.title():
                 country_state = y['code']
                 # above = "US-NY" if New york put into form
                 miss_state.append(country_state)
-                # print(country_state)
-        #Error Handling:  Check for missing/mispelled state:
+
+        #Error Handling:  check for mispelled state:
         if miss_state == []:
             flash('Valid STATE name was not entered.  Please check spelling, and try again', category='danger')
             return redirect(url_for('api.eBirdSearchFunction'))
 
         #Gets eBird County code:
         county_code = get_regions('bdhdkslf0ktt', 'subnational2', f'{country_state}')
-        # print(county_code)
 
         miss_county = []
         for x in county_code:
@@ -281,7 +255,6 @@ def eBirdSearchFunction():
             flash('Valid COUNTY name was not entered.  Please check spelling, and try again', category='danger')
             return redirect(url_for('api.eBirdSearchFunction'))
 
-        
         try:
             records = get_observations('bdhdkslf0ktt', f'{country_state_county}', back=f"{eb_search_input.days}")
             
@@ -289,15 +262,12 @@ def eBirdSearchFunction():
                 flash('No sightings were reported during timeframe requested. Try increasing number of days.', category='danger')
                 return redirect(url_for('api.eBirdSearchFunction'))
 
-            
             return render_template('ebird_search_results.html', form = records, form_state=eb_search_input.state, form_county=eb_search_input.county, form_days=eb_search_input.days)
+        
         except:
-                #Error handling: no number or '0' entered for days
+                #Error handling: '0' entered for days
                 flash('Please enter a number of days from 1-30.', category='danger')
                 return redirect(url_for('api.eBirdSearchFunction'))
-
-
-            
 
     return render_template('ebird_search.html', form=ebform)
 
@@ -323,54 +293,23 @@ def fetchEvilCatFact():
     # https://catfact.ninja/fact 
     # https://api.thecatapi.com/v1/images/search
 
-#Trying to discover route I deleted that is needed by the react app
-#Will Add here if I find it.
-
-# SCREWED WITH THIS  and got it to work.  The change was so that jason data was a list of dictionaries.
 @api.route('/react', methods=['GET'])
 def getBirds():
-    # birds = React.query.all()
     birds = {'Birds': [a.to_dict() for a in React.query.all()]}
-    # birds = {a.common_name: a.to_dict() for a in birds}
     return jsonify(birds), 200
     
-    # birds = {x.bird_id: x for x in birds}
-    # print(birds)
-    # return jsonify(birds), 200
 
-    # animals = Animal.query.all()
-    # # we discovered that we cannot directly JSONify a Python object
-    # # so we need to transform this list of animals into either a list of dictionaries or a dictionary of dictionaries or some similar structure
-    # print(animals)
-    # #animals = [a.to_dict() for a in animals] # list comprehension version
-    # animals = {a.id: a.to_dict() for a in animals} # dictionary comprehension version
-    # return jsonify(animals), 200
-
-    
-    # birds = [bird.to_dict() for bird in Bird.query.all()]
-    # jsonify(birds.to_dict()), 200
-    # return jsonify(birds), 200
-
-
-
-
-
-
-
- #Searching Data of Other Users   
+#Searching Data of Other Users   
 
 @api.route('/other-user-search', methods=['GET', 'POST'])
 # @token_required
 def otherUserSearch():
-
-    #**********<>Need to add POST route here**********************************************************
+    '''Searches data of other Bird Brain users'''
+    #***<Need to add POST route here?***
 
     return render_template('other-user-search.html')
 
-
-
-# ***Old**
-
+### Need to finish CRUD operations by creating UPDATE and DELETE functions based on below###
 
 # @api.route('/update/<string:id>', methods = ['POST'])
 # @token_required

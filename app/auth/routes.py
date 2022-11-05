@@ -33,7 +33,6 @@ def register():
     form = RegistrationForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            # print(form.data)
             newuser = User(form.username.data, form.email.data, form.password.data,  )
             print(newuser)
 
