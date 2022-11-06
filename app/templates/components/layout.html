@@ -65,8 +65,17 @@
                     <a style="color:white" class="nav-link" href="{{ url_for('blog.users') }}">Find&nbsp;Bird Brainers &nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <li class="nav-item active">
-                    <a style="color:white" class="nav-link" href="{{ url_for('auth.logout') }}">Sign&nbsp;Out</a>
+                    <a style="color:white" class="nav-link" href="{{ url_for('auth.logout') }}">Sign&nbsp;Out&nbsp;&nbsp;&nbsp;</a>
                 </li>
+
+                <li class="nav-item active">
+                    <a style="color:white" class="nav-link" href="">|</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a style="color:#6fedbf" class="nav-link" href=""> &nbsp;&nbsp; {{current_user.username}}</a>
+                </li>
+
                 {% else %}
 
                 <li class="nav-item active ml-auto">

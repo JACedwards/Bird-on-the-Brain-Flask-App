@@ -299,8 +299,6 @@ def getBirds():
     return jsonify(birds), 200
     
 
-#Searching Data of Other Users   
-
 @api.route('/other-user-search', methods=['GET', 'POST'])
 # @token_required
 def otherUserSearch():
