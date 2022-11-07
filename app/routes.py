@@ -17,10 +17,10 @@ def signup():
     signup = 'Signup'
     return render_template('signup.html', signup = signup)
 
-@app.route('/backyard_list')
+# @app.route('/backyard_list')
 
-def backyard_list():
-    backyard = 'Backyard List'
-    return render_template('backyard_list.html', backyard = backyard)    
+# def backyard_list():
+#     backyard = 'Backyard List'
+#     return render_template('backyard_list.html', backyard = backyard)    
 
 

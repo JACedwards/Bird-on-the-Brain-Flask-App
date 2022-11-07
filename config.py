@@ -9,14 +9,14 @@ import os
 basedir = os.path.abspath(os.path.dirname(__name__))
 
 
-#set upu class for our configuaration variables
+#set up class for our configuaration variables
 
 class Config:
 
     """Setting configuation variables that tell flask how to run"""
     # NONE OF NEXT should be public info
-        # so theira acutal value is in .env file
-        # value here will just be function cal to .env file
+        # so their acutal value is in .env file
+        # value here will just be function call to .env file
 
     FLASK_APP = os.environ.get('FLASK_APP') 
     FLASK_ENV = os.environ.get('FLASK_ENV')

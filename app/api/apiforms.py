@@ -10,6 +10,8 @@ class BirdForm(FlaskForm):
     # date_month = db.Column(db.String(5), nullable=False )
     # date_day = db.Column(db.String(5), nullable=False )
     date = StringField('Date')
+    #currently using following three lines to handle date (with month & year optional)
+    #to change to datepicker, try this video:  https://www.youtube.com/watch?v=jAdFZa6KZNE
     date_year = StringField('Year', validators=[DataRequired()])
     date_month = StringField('Month')
     date_day = StringField('Day')

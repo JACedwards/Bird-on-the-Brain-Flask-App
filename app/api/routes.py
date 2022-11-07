@@ -13,9 +13,6 @@ import json
 from datetime import datetime
 
 
-
-
-
 # leaving out validate on submit for now
 @api.route('/sighting', methods=['GET', 'POST'])
 @login_required
@@ -290,8 +287,6 @@ def fetchEvilCatFact():
 
     return render_template('evil_cat.html', form=data, image=data_image, random_bird = bird_list)
 
-    # https://catfact.ninja/fact 
-    # https://api.thecatapi.com/v1/images/search
 
 @api.route('/react', methods=['GET'])
 def getBirds():
