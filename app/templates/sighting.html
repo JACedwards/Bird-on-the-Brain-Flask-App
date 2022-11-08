@@ -24,29 +24,32 @@
                         {{ form.common_name(class='form-control', size='50') }}
                     </fieldset>
                 </div>
+                
                 <div class="form-group">
                     <fieldset>
-                        {{ form.latin_name.label }}
-                        {{ form.latin_name(class='form-control', placeholder='(Optional)') }}
+                        {{ form.state.label }}
+                        {{ form.state(class='form-control') }}
                     </fieldset>
                 </div>
-
                 <div class="form-group">
                     <fieldset>
                         {{ form.date_year.label }}
                         {{ form.date_year(class='form-control') }}
                     </fieldset>
                 </div>
+                <p>
+                    <b>Fields Below Optional</b>
+                </p>
                 <div class="form-group">
                     <fieldset>
                         {{ form.date_month.label }}
-                        {{ form.date_month(class='form-control', placeholder='(Optional [2 digits])') }}
+                        {{ form.date_month(class='form-control', placeholder='(2 digits: April = 04)') }}
                     </fieldset>
                 </div>
                 <div class="form-group">
                     <fieldset>
                         {{ form.date_day.label }}
-                        {{ form.date_day(class='form-control', placeholder='(Optional [2 digits])') }}
+                        {{ form.date_day(class='form-control', placeholder='(2 digits: First = 01)') }}
                     </fieldset>
                 </div>
 
@@ -54,21 +57,21 @@
                 <div class="form-group">
                     <fieldset>
                         {{ form.county.label }}
-                        {{ form.county(class='form-control', placeholder='(Optional)') }}
+                        {{ form.county(class='form-control') }}
                     </fieldset>
                 </div>
+             
                 <div class="form-group">
                     <fieldset>
-                        {{ form.state.label }}
-                        {{ form.state(class='form-control') }}
+                        {{ form.latin_name.label }}
+                        {{ form.latin_name(class='form-control') }}
                     </fieldset>
                 </div>
-                
-                
+
                 <div class="form-group">
                     <fieldset>
                         {{ form.comments.label }}
-                        {{ form.comments(class='form-control', rows='4', type='textarea', placeholder='(Optional)') }}
+                        {{ form.comments(class='form-control', rows='4', type='textarea') }}
                     </fieldset>
                 </div>
 
@@ -79,6 +82,7 @@
                         {{ form.image(class='form-control', disabled='true', placeholder='(Planned future functionality)') }}
                     </fieldset>
                 </div>
+
                 {{ form.submit(class='btn btn-primary', style='background-color:#088256;border-radius:10px;width:100%')}}
             </div> 
         </form>
