@@ -19,6 +19,7 @@ from datetime import datetime
 def postSighting():
     bform = BirdForm()
     if request.method == 'POST':
+        print(f"request method == POST")
         sighting=bform.data
         id=current_user.id
         sighting['user_id']=id
@@ -29,11 +30,16 @@ def postSighting():
         search_input=Bird.query.filter_by(common_name=bird.common_name).all()
         print(search_input)
 
+        annual_bool = False
+        lifetime_bool = False
         if search_input == []:
             bird.__dict__['annual']='annual'
             bird.__dict__['lifetime']='lifetime'
+            annual_bool = True
+            lifetime_bool = True
             db.session.add(bird)
             db.session.commit()
+            print(f"search_input = []")
 
         # Checks to see if sighted bird already in annual list
         #   if not, adds to annual list
@@ -41,7 +47,8 @@ def postSighting():
         for x in search_input:
             bird_dict = x.__dict__
             list_bird_dicts.append(bird_dict)
-                     
+
+                   
         for x in list_bird_dicts:
             if x['annual'] == 'annual':
                 a = 'annual'
@@ -50,25 +57,34 @@ def postSighting():
 
         if a == 'missing':
             bird.__dict__['annual']='annual'
+            print(f"annual bool for a=missing' = {annual_bool}")
+
 
         # Checks to see if sighted bird already in lifetime list
         #   if not, adds to lifetime list
         b=''
+
         for y in list_bird_dicts:
             if y['lifetime'] == 'lifetime':
                 b = 'lifetime'
             else:
                 b = None
-
+            print(f"lifetime bool for b=None' = {lifetime_bool}")
         if b == None:
-            bird.__dict__['lifetime']='lifetime'           
+            bird.__dict__['lifetime']='lifetime'
+
+            print(f"lifetime bool for b= 'lifetime' = {lifetime_bool}") 
+         
         
         db.session.add(bird)
         db.session.commit()
 
         #Could make this more specific, indicating which of three lists this particular
             #bird has been added to.
-        flash(f'{bird.common_name} has been added to your lists.', category = 'success')
+        if annual_bool == True and lifetime_bool == True:
+            flash(f'{bird.common_name} has been added to your sightings records. {bird.common_name} has also been added to your annual and lifetime lists.', category = 'success')
+        else:
+            flash(f'{bird.common_name} has been added to your sightings records.', category = 'success')
                 
         return redirect(url_for('api.postSighting'))
     else:
