@@ -6,9 +6,6 @@ from wtforms.validators import DataRequired
 class BirdForm(FlaskForm):
     common_name = StringField('Bird Name', validators=[DataRequired()])
     latin_name = StringField('Latin Name')
-    # date_year = db.Column(db.String(5), nullable=False )
-    # date_month = db.Column(db.String(5), nullable=False )
-    # date_day = db.Column(db.String(5), nullable=False )
     date = StringField('Date')
     #currently using following three lines to handle date (with month & year optional)
     #to change to datepicker, try this video:  https://www.youtube.com/watch?v=jAdFZa6KZNE

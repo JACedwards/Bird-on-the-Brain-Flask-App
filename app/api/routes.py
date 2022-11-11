@@ -79,8 +79,7 @@ def postSighting():
         db.session.add(bird)
         db.session.commit()
 
-        #Could make this more specific, indicating which of three lists this particular
-            #bird has been added to.
+
         if annual_bool == True and lifetime_bool == True:
             flash(f'{bird.common_name} has been added to your sightings records. {bird.common_name} has also been added to your annual and lifetime lists.', category = 'success')
         else:
