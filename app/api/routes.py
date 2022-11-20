@@ -283,7 +283,8 @@ def eBirdSearchFunction():
 
     return render_template('ebird_search.html', form=ebform)
 
-
+#Client wants me to add button to refresh/fetch new fact/pic
+#Think I already have a form to do so
 @api.route('/evil_cat', methods=['GET'])
 def fetchEvilCatFact():
     
