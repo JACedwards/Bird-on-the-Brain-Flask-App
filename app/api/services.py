@@ -16,37 +16,6 @@ def token_required(api_route):
         return api_route(*args, **kwargs)
     return decorator_function
 
-#Had to abandon following this function when creating error handling.  Moved this code back into main function.
-
-# def getCountyByDate(state_name, county_name, days):
-
-#     """Call to API returning Bird observations for specified county ('county_name') and number of days from present backwards ('days')"""
-
-#     state_code = get_regions('bdhdkslf0ktt', 'subnational1', 'US')
-#     # print(state_code)
-#     # above = dictionary of state codes
-
-#     #Error Handling:  Check for missing/mispelled state:
-#     miss_state = []
-#     for y in state_code:
-#         if y['name'] == state_name:
-#             country_state = y['code']
-#             # above = "US-NY" if New york put into form
-#             miss_state.append(country_state)
-#     print(miss_state)
-  
-    
-#     county_code = get_regions('bdhdkslf0ktt', 'subnational2', f'{country_state}')
-#     # print(county_code)
-#     # dictionary of county codes
-
-#     for x in county_code:
-#         if x['name'] == county_name:
-#             country_state_county = x['code']
-
-#     records = get_observations('bdhdkslf0ktt', f'{country_state_county}', back=f"{days}")
-#     # print(records)
-#     return records
 
 
 
