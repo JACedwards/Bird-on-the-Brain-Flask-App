@@ -97,13 +97,17 @@ def getAnnualList():
     galform = AnnualListForm()
 
     if request.method == 'POST':
-        
+        print("this is a test")
         if current_user.is_authenticated:
 
             gal_search=galform.data
+
             
             print(f'this is current users id" {current_user.id}')
             print('this is gal_search', gal_search)
+
+            filtered_list = []
+            which_list = ''
             for k , v in gal_search.items():
                 if v == '':
                     which_list = k
@@ -148,6 +152,12 @@ def getAnnualList():
                     if d['common_name'] not in existing_dicts:
                         existing_dicts.add(d['common_name'])
                         filtered_list.append(d)
+            
+            # tried already: still need to figure out error message if both options are chosen
+            else:
+                # Error Handling:  if neither option is chosen'
+                flash(f"Please choose either Annual or Lifetime.", category='danger')
+                return redirect(url_for('api.getAnnualList'))
                             
             return render_template('annual_list_results.html', form = filtered_list,header=which_list ) 
 
