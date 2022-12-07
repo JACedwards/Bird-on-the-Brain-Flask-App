@@ -180,29 +180,6 @@ def internalSearch():
     if request.method == 'POST':
         
         ls_search=lsform.data
-
-        #check for no boxes filled in:
-        count = 0
-        for k, v in ls_search.items():
-            if k == 'common_name' and v =='':
-                count +=1
-            if k == 'date_year' and v =='':
-                count +=1
-            if k == 'county' and v =='':
-                count +=1
-            if k == 'state' and v =='':
-                count +=1
-        if count == 4:
-            flash('Please fill in ONE of the fields below', category='danger')
-            return redirect(url_for('api.internalSearch'))
-        if count == 1 or count == 2:
-            flash('At present, Bird Brain user sightings are only searchable by one field at a time.  Please fill in only one field per search', category='danger')
-            return redirect(url_for('api.internalSearch'))
- 
-
-        
-        #
-        print(f"This is ls_search:  {ls_search}")
         print(ls_search)
         for k, v in ls_search.items():
             if v != None and k != 'csrf_token' and v !='' and v != True:
