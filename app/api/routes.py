@@ -196,7 +196,7 @@ def internalSearch():
             flash('Please fill in ONE of the fields below', category='danger')
             return redirect(url_for('api.internalSearch'))
         if count == 1 or count == 2:
-            flash('At present, Bird Brain user sightings are only searchable by one field at a time.  Please fill in only one field per search', category='danger')
+            flash('At present, Bird Brain user sightings are only searchable by one field at a time.  Please resubmit with only one field completed.', category='danger')
             return redirect(url_for('api.internalSearch'))
  
 
