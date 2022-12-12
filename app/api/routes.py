@@ -102,6 +102,18 @@ def getAnnualList():
 
             gal_search=galform.data
 
+            count = 0
+            for k, v in gal_search.items():
+                if k == 'annual' and v =='':
+                    count +=1
+                if k == 'lifetime' and v =='':
+                    count +=1
+            if count == 2:
+                flash('Please choose only one option', category='danger')
+                return redirect(url_for('api.getAnnualList', form=None))
+
+            
+
             
             print(f'this is current users id" {current_user.id}')
             print('this is gal_search', gal_search)
@@ -157,7 +169,7 @@ def getAnnualList():
             else:
                 # Error Handling:  if neither option is chosen'
                 flash(f"Please choose either Annual or Lifetime.", category='danger')
-                return redirect(url_for('api.getAnnualList'))
+                return redirect(url_for('api.getAnnualList', form=None))
                             
             return render_template('annual_list_results.html', form = filtered_list,header=which_list ) 
 
@@ -197,7 +209,7 @@ def internalSearch():
             return redirect(url_for('api.internalSearch'))
         if count == 1 or count == 2:
             flash('At present, Bird Brain user sightings are only searchable by one field at a time.  Please resubmit with only one field completed.', category='danger')
-            return redirect(url_for('api.internalSearch'))
+            return redirect(url_for('api.internalSearch',form=None))
  
 
         
