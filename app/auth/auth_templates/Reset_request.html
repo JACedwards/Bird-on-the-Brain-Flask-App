@@ -1,0 +1,33 @@
+<!-- #started blocking out reset request page -->
+
+{% extends 'base.html'%}
+{% block title%}Sign In{% endblock title%}
+
+
+{% block content%}
+
+<form class="p3" method="POST" style="color:#088256">
+    {{form.hidden_tag()}}
+    <div class="form-group" style="margin-top:30px; font-weight:bold">
+        <fieldset>
+            {{form.username.label}}
+            {{ form.username(class='form-control', placeholder='Username. . .') }}
+
+        </fieldset>
+        <small id="emailHelp" class="form-text text-muted"></small>
+    </div>
+
+    <div style="background-color:#088256;border-radius:10px">
+        {{form.submit (class='btn btn-block btn-info btn-rounded', style='background-color:#088256') }}
+
+    </div>
+
+    <!-- starting to work on reset   **ready to go to routes page
+    (Using this video here; was using another video in routes)
+    https://www.youtube.com/watch?v=zYWpEJAHvaI (currently at minute 3:43 (created template reset-request.html already))-->
+
+
+
+</form>
+
+{% endblock content%}
