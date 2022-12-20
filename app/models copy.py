@@ -1,9 +1,8 @@
 from __future__ import with_statement
 from flask_sqlalchemy import SQLAlchemy
-from itsdangerous import TimedSerializer as Serializer
+
 db = SQLAlchemy()
 
-import app
 from flask_login import LoginManager, UserMixin
 login = LoginManager()
 
@@ -48,7 +47,9 @@ class User(db.Model, UserMixin):
         secondaryjoin=(followers.c.user_id==id), #will find all of the users who follow this user.
         backref=db.backref('followers')
     )
+
     
+
     def __init__(self, username, email, password, first_name='', last_name=''):
         self.username = username
         self.email = email.lower() 
@@ -58,26 +59,6 @@ class User(db.Model, UserMixin):
         self.password = generate_password_hash(password)
         self.api_token = str(token_hex(16))
 
-    
-    #____________New get token for password starts here----------
-
-    def get_token(self):
-        serial = Serializer(app.app.config['SECRET_KEY'])
-        return serial.dumps({'user_id': self.id})
-
-    @staticmethod
-    def verify_token(token):
-        serial=Serializer(app.app.config['SECRET_KEY'])
-        try:
-            user_id = serial.loads(token)['user_id']
-        except:
-            return None
-        return User.query.get(user_id)
-    
-
-    #ends here
-
-    
     def follow(self, u):
         """expects a user object, follows that user"""
         
