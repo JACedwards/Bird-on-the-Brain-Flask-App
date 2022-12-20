@@ -21,3 +21,7 @@ class RegistrationForm(FlaskForm):
    password = PasswordField('Password', validators=[DataRequired()])
    confirm_password = PasswordField('Confirm Password', validators=[EqualTo('password')])
    submit = SubmitField()
+
+class ResetRequestForm(FlaskForm):
+   email = StringField('Email', validators=[DataRequired()])
+   submit = SubmitField('Reset Password')

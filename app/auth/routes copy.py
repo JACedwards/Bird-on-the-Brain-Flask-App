@@ -55,12 +55,6 @@ def register():
     elif request.method == 'GET':
         return render_template('register.html', form=form)
 
-def send_mail():
-    pass
-
-    # <!-- starting to work on reset   **ready to start on email through Itsdangerous
-    # (Using this video here; was using another video in routes)
-    # https://www.youtube.com/watch?v=zYWpEJAHvaI (currently at minute 12:31 (created template reset-request.html already))-->
 
 @auth.route('/reset_password', methods=['GET','POST'])
 def reset_request():
@@ -69,16 +63,26 @@ def reset_request():
     if request.method == 'POST':
         print('Post method')
         if form.validate_on_submit():
-            user=User.query.filter_by(email=form.email.data).first()
-            if user:
-                send_mail()
-
-                flash(f'Reset request sent. Please, check your email.', category = 'success')
-                return redirect(url_for('auth.login', form=None))
+            # print('flash message should show')
+            flash(f'Reset request sent. Please, check your email.', category = 'success')
+            return redirect(url_for('auth.reset_request', form=None))
     return render_template('reset_request.html', title='Reset Request', form=form)
 
 
 
+#may have important problem above
+# def get_reset_token(self, expires_sec=1800):
+#     s = Serializer(app.config['SECRET_KEY'], expires_sec)
+#     return s.dumps({'user_id': self.id}).decode('utf-8')
+
+# @staticmethod
+# def verify_reset_token(token):
+#     s=Serializer(app.config['SECRET_KEY'])
+#     try:
+#         user_id = s.loads(token)['user_id']
+#     except:
+#         return None
+#     return User.query.get(user_id)
 
 
 @auth.route('/logout')
