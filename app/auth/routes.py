@@ -59,10 +59,16 @@ def register():
         return render_template('register.html', form=form)
 
 
+    
     # <!-- ---------------------------starting to work on reset   **ready to start on email through Itsdangerous
 
     # (Using this video here; was using another video in routes)
-    # https://www.youtube.com/watch?v=zYWpEJAHvaI (currently at minute 50:00 (getting error:  "socket.gaierror: [Errno 11002] getaddrinfo failed" when try to input an email on the auth/reset_passwword page.  Might be some port issues in __init__.py. also might be app.mail command. It is different from video, but couldn't see where video was ever calling the mail.send function ))-->
+    # https://www.youtube.com/watch?v=zYWpEJAHvaI (currently at minute 50:00 (getting error:  "socket.gaierror: [Errno 11002] getaddrinfo failed" when try to input an email on the auth/reset_passwword page.  Might be some port issues in __init__.py. also might be app.mail command. It is different from video, but couldn't see where video was ever calling the mail.send function ))
+    # 
+    # IF WANT TO DEPLOY, need to make the Forgot Password button on login page go away.  I think that will hide all the other pages--
+    # (Once figure out, need to update beanstalk / docker version)>
+
+
 
 def send_mail(user):
     print('send_mail function activated')
