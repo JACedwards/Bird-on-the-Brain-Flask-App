@@ -35,13 +35,13 @@ login.login_message_category = 'danger'
 
 #mail additions
 
-app.config['MAIL_SERVER'] = 'stmp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'noreply.bird.brain@gmail.com'
-app.config['MAIL_PASSWORD']  = 'Hurston1947#Go0Ber'
+# app.config['MAIL_SERVER'] = 'stmp.gmail.com'
+# app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USE_TLS'] = True
+# app.config['MAIL_USERNAME'] = 'noreply.bird.brain@gmail.com'
+# app.config['MAIL_PASSWORD']  = 'Hurston1947#Go0Ber'
 
-mail=Mail(app)
+# mail=Mail(app)
 
 
 
